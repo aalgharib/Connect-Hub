@@ -2,6 +2,8 @@ import mongoose from "mongoose";
 import crypto from "crypto";
 const Schema = mongoose.Schema;
 
+
+//Defining a user schema 
 const userSchema = new Schema({
   name: {
     type: String,
@@ -24,6 +26,7 @@ const userSchema = new Schema({
   },
 }, { timestamps: true });
 
+// Virtual property for handling plain text password
 userSchema
   .virtual("password")
   .set(function (password) {
@@ -35,10 +38,12 @@ userSchema
     return this._password;
   });
 
+//Methods to authenticate a user by comapring an encrypted password
 userSchema.methods = {
   authenticate: function (plainText) {
     return this.encryptedPassword(plainText) === this.hashedPassword;
   },
+  //This method will generate the encrypted password 
   encryptedPassword: function (password) {
     if (!password) return "";
     try {
@@ -50,11 +55,13 @@ userSchema.methods = {
       return "";
     }
   },
+  //This method will generate a salt for password encryption 
   makeSalt: function () {
     return Math.round(new Date().valueOf() * Math.random()) + "";
   },
 };
 
+//validating the password field
 userSchema.path("hashedPassword").validate(function (v) {
   if (this.hashedPassword && this._password.length < 6) {
     this.invalidate("password", "Password must be at least 6 characters long.");
