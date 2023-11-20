@@ -2,9 +2,8 @@ import express from "express";
 import cookieParser from "cookie-parser";
 import config from "./server/config/config.js";
 import userRoutes from "./server/routes/userRoutes.js";
-import authRoutes from "./server/routes/authRoutes.js";
+//import authRoutes from "./server/routes/authRoutes.js";
 // DB connection
-// import "../server/config/dbConnection.js";
 import mongoose from "mongoose";
 const URI = config.mongoURI;
 mongoose.connect(URI);
@@ -27,10 +26,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.use("/", userRoutes);
-app.use("/", authRoutes);
+//app.use("/", authRoutes);
 app.get("/", (req, res) => {
-  res.json({ massage: " Welcome to ConnectHub!" });
+  res.json({ message: " Welcome to ConnectHub!" });
 });
+
 // Error handling middleware
 app.use((err, req, res, next) => {
   if (err.name === "UnauthorizedError") {
