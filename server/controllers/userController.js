@@ -27,6 +27,7 @@ const registerUser = async (req, res, next) => {
   }
 };
 
+//Finding a user by ID
 const findUserById = async (req, res, next, id) => {
   try {
     let user = await User.findById(id);
@@ -51,7 +52,7 @@ const findUserProfile = (req, res) => {
   return res.json(req.profile);
 };
 
-
+//Updating a user profile
 const update = async (req, res) => {
   /*try {
     let user = req.profile;
@@ -81,6 +82,8 @@ const read = (req, res) => {
   return res.json(req.profile);
 };
 
+
+//Delete a user profile 
 const deleteUser = async (req, res, next) => {
  /* let user = req.profile;
   user.remove((err, deletedUser) => {
