@@ -3,7 +3,7 @@ import User from "../models/userModel.js";
 //Get all users
 const list = async (req, res) => {
   try {
-    let users = await User.find().select("name email updated created");
+    let users = await User.find().select("name email password updated created");
     res.json(users);
   } catch (err) {
     return res.status(400).json({
@@ -70,10 +70,10 @@ const update = async (req, res) => {
   try {
     const updateUser = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
     res.json({ user: updateUser, message: 'User updated successfully.' });
-} catch (error) {
+  } catch (error) {
     console.log(error);
     res.status(500).json(error);
-}
+  }
 };
 
 const read = (req, res) => {
@@ -85,29 +85,29 @@ const read = (req, res) => {
 
 //Delete a user profile 
 const deleteUser = async (req, res, next) => {
- /* let user = req.profile;
-  user.remove((err, deletedUser) => {
-    if (err) {
-      return res.status(400).json({
-        // error: errorHandler.getErrorMessage(err),
-      });
-        deletedUser.hashedPassword = undefined;
-    user.salt = undefined;
-    res.json(user);
-    ///
-    res.status(200).json({
-      message: "User deleted successfully!",
-    });
-  }); };
-*/
-      try {
-        const deletedUser = await User.findByIdAndDelete(req.params.id);
-        res.json({ user: deletedUser, message: 'User deleted successfully.' });
-    } catch (error) {
-        console.log(error);
-        res.status(500).json(error);
-    }
-    }
-  
+  /* let user = req.profile;
+   user.remove((err, deletedUser) => {
+     if (err) {
+       return res.status(400).json({
+         // error: errorHandler.getErrorMessage(err),
+       });
+         deletedUser.hashedPassword = undefined;
+     user.salt = undefined;
+     res.json(user);
+     ///
+     res.status(200).json({
+       message: "User deleted successfully!",
+     });
+   }); };
+ */
+  try {
+    const deletedUser = await User.findByIdAndDelete(req.params.id);
+    res.json({ user: deletedUser, message: 'User deleted successfully.' });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error);
+  }
+}
+
 
 export default { registerUser, findUserById, read, list, deleteUser, update };

@@ -2,7 +2,7 @@ import express from "express";
 import cookieParser from "cookie-parser";
 import config from "./server/config/config.js";
 import userRoutes from "./server/routes/userRoutes.js";
-//import authRoutes from "./server/routes/authRoutes.js";
+import authRoutes from "./server/routes/authRoutes.js";
 // DB connection
 import mongoose from "mongoose";
 const URI = config.mongoURI;
@@ -26,7 +26,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.use("/", userRoutes);
-//app.use("/", authRoutes);
+app.use("/", authRoutes);
 app.get("/", (req, res) => {
   res.json({ message: " Welcome to ConnectHub!" });
 });
