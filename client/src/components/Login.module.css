@@ -1,0 +1,22 @@
+.container {
+  max-width: 60%;
+  height: 200px;
+}
+
+.transparentBoxBackground {
+  position: relative;
+  z-index: 0;
+}
+
+.transparentBoxBackground::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #e2e2e2; /* Your desired background color */
+  opacity: 0.9; /* Your desired opacity level */
+  z-index: -1;
+  border-radius: 16px; /* Match the border-radius of the Box */
+}
