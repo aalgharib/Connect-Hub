@@ -3,7 +3,6 @@ import styles from "./Login.module.css";
 import background from "../assets/logo.png";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import Link from "@mui/material/Link";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
@@ -11,7 +10,7 @@ import InputAdornment from "@mui/material/InputAdornment";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import LockIcon from "@mui/icons-material/Lock";
 
-const Login = () => {
+const SignUp = () => {
   // Back ground logo style
   const backgroundStyle = {
     backgroundImage: `url(${background})`,
@@ -29,7 +28,7 @@ const Login = () => {
   return (
     <div>
       <div style={backgroundStyle}>
-        <Typography>Login to Connect Hub</Typography>
+        <Typography>Create a Connect Hub Account</Typography>
 
         {/* Form */}
         <Container className={styles.container}>
@@ -45,6 +44,80 @@ const Login = () => {
               height: "100%",
             }}
           >
+            <TextField
+              variant="standard"
+              fullWidth
+              placeholder="First name"
+              type="text"
+              name="firstName"
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <span
+                      style={{
+                        fontWeight: "bold",
+                        fontSize: "18px",
+                        display: "flex",
+                        alignItems: "center",
+                        margin: "0 6px 0 6px",
+                      }}
+                    >
+                      F
+                    </span>
+                  </InputAdornment>
+                ),
+                disableUnderline: true,
+              }}
+              sx={{
+                backgroundColor: "#005aaa",
+                borderRadius: "4px",
+                input: {
+                  color: "#fff",
+                },
+              }}
+              InputLabelProps={{
+                sx: {
+                  color: "#fff",
+                },
+              }}
+            />
+            <TextField
+              variant="standard"
+              fullWidth
+              placeholder="Last name"
+              type="text"
+              name="lastName"
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <span
+                      style={{
+                        fontWeight: "bold",
+                        fontSize: "18px",
+                        display: "flex",
+                        alignItems: "center",
+                        margin: "0 6px 0 6px",
+                      }}
+                    >
+                      L
+                    </span>
+                  </InputAdornment>
+                ),
+                disableUnderline: true,
+              }}
+              sx={{
+                backgroundColor: "#005aaa",
+                borderRadius: "4px",
+                input: {
+                  color: "#fff",
+                },
+              }}
+              InputLabelProps={{
+                sx: {
+                  color: "#fff",
+                },
+              }}
+            />
             <TextField
               variant="standard"
               fullWidth
@@ -67,8 +140,7 @@ const Login = () => {
               }}
               InputLabelProps={{
                 sx: {
-                  color: "#fff", // Replace with your desired color
-                  // Add additional styles if needed
+                  color: "#fff",
                 },
               }}
             />
@@ -95,8 +167,7 @@ const Login = () => {
               }}
               InputLabelProps={{
                 sx: {
-                  color: "#fff", // Replace with your desired color
-                  // Add additional styles if needed
+                  color: "#fff",
                 },
               }}
             />
@@ -109,14 +180,8 @@ const Login = () => {
                 borderRadius: "12rem",
               }}
             >
-              Login
+              Create
             </Button>
-            <Typography sx={{ textAlign: "center" }}>
-              Don't have an account?
-              <Link href="/signup" variant="body2">
-                {" Sign Up!"}
-              </Link>
-            </Typography>
           </Box>
         </Container>
       </div>
@@ -124,4 +189,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default SignUp;
