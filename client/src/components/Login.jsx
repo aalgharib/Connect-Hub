@@ -1,9 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styles from "./Login.module.css";
 import background from "../assets/logo.png";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import Link from "@mui/material/Link";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
@@ -113,9 +113,7 @@ const Login = () => {
             </Button>
             <Typography sx={{ textAlign: "center" }}>
               Don't have an account?
-              <Link href="/signup" variant="body2">
-                {" Sign Up!"}
-              </Link>
+              <Link to="/signup">{" Sign Up!"}</Link>
             </Typography>
           </Box>
         </Container>
