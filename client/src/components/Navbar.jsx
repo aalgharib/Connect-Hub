@@ -69,11 +69,16 @@ const Navbar = () => {
         }}
       >
         <Toolbar sx={{ maxHeight: "60px" }}>
-          <IconButton size="small" edge="start" color="inherit" sx={{ mr: 2 }}>
-            <Link to="/home" style={{ color: "inherit" }}>
+          <Link to="/home" style={{ color: "inherit" }}>
+            <IconButton
+              size="small"
+              edge="start"
+              color="inherit"
+              sx={{ mr: 2 }}
+            >
               <Avatar src={Logo} alt="Logo" />
-            </Link>
-          </IconButton>
+            </IconButton>
+          </Link>
           <Search>
             <SearchIconWrapper>
               <SearchIcon />
@@ -93,22 +98,26 @@ const Navbar = () => {
           >
             <CommentIcon />
           </IconButton>
-          <IconButton
-            size="large"
-            aria-label="account of current user"
-            aria-haspopup="true"
-            color="inherit"
-          >
-            <PeopleIcon />
-          </IconButton>
-          <IconButton
-            size="large"
-            aria-label="account of current user"
-            aria-haspopup="true"
-            color="inherit"
-          >
-            <AccountCircle />
-          </IconButton>
+          <Link to="/friends" style={{ color: "inherit" }}>
+            <IconButton
+              size="large"
+              aria-label="account of current user"
+              aria-haspopup="true"
+              color="inherit"
+            >
+              <PeopleIcon />
+            </IconButton>
+          </Link>
+          <Link to="/profile" style={{ color: "inherit" }}>
+            <IconButton
+              size="large"
+              aria-label="account of current user"
+              aria-haspopup="true"
+              color="inherit"
+            >
+              <AccountCircle />
+            </IconButton>
+          </Link>
           <IconButton
             size="large"
             edge="end"
