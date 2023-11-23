@@ -8,9 +8,9 @@ import PostCard from "./PostCard";
 
 // sample data for the posts
 const samplePosts = [
-  { content: "Test1." },
-  { content: "Test2" },
-  { content: "Test3" },
+  { id: 1, content: "Test1." },
+  { id: 2, content: "Test2" },
+  { id: 3, content: "Test3" },
 ];
 
 const Home = () => {
@@ -40,7 +40,7 @@ const Home = () => {
         {/* Use real data for the posts */}
         <Box sx={{ flex: 2, bgcolor: "#ffffff", padding: 3 }}>
           {samplePosts.map((post) => (
-            <PostCard content={post.content} />
+            <PostCard key={post.id} content={post.content} />
           ))}
         </Box>
       </Box>
