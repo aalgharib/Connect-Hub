@@ -3,7 +3,7 @@ import User from "../models/userModel.js";
 //Get all users
 const list = async (req, res) => {
   try {
-    let users = await User.find().select("name email password updated created");
+    let users = await User.find().select("name email updated created");
     res.json(users);
   } catch (err) {
     return res.status(400).json({
@@ -13,7 +13,7 @@ const list = async (req, res) => {
 };
 
 // Register new user
-const registerUser = async (req, res, next) => {
+const registerUser = async (req, res) => {
   const user = new User(req.body);
   try {
     await user.save();
@@ -32,43 +32,24 @@ const findUserById = async (req, res, next, id) => {
   try {
     let user = await User.findById(id);
     if (!user)
-      return res.status("400").json({
+      return res.status(400).json({
         error: "User not found",
       });
     req.profile = user;
     next();
   } catch (err) {
-    return res.status("400").json({
+    return res.status(400).json({
       error: "Could not retrieve user",
     });
   }
 };
 
 
-const findUserProfile = (req, res) => {
-  // eliminate password related fields before sending the user object
-  req.profile.hashedPassword = undefined;
-  req.profile.salt = undefined;
-  return res.json(req.profile);
-};
 
 //Updating a user profile
 const update = async (req, res) => {
-  /*try {
-    let user = req.profile;
-    user = extend(user, req.body);
-    user.updated = Date.now();
-    await user.save();
-    user.hashed_password = undefined;
-    user.salt = undefined;
-    res.json(user);
-  } catch (err) {
-    return res.status(400).json({
-      //   error: errorHandler.getErrorMessage(err),
-    });
-  }*/
   try {
-    const updateUser = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    const updateUser = await User.findByIdAndUpdate(req.params.userId, req.body, { new: true });
     res.json({ user: updateUser, message: 'User updated successfully.' });
   } catch (error) {
     console.log(error);
@@ -85,23 +66,8 @@ const read = (req, res) => {
 
 //Delete a user profile 
 const deleteUser = async (req, res, next) => {
-  /* let user = req.profile;
-   user.remove((err, deletedUser) => {
-     if (err) {
-       return res.status(400).json({
-         // error: errorHandler.getErrorMessage(err),
-       });
-         deletedUser.hashedPassword = undefined;
-     user.salt = undefined;
-     res.json(user);
-     ///
-     res.status(200).json({
-       message: "User deleted successfully!",
-     });
-   }); };
- */
   try {
-    const deletedUser = await User.findByIdAndDelete(req.params.id);
+    const deletedUser = await User.findByIdAndDelete(req.params.userId);
     res.json({ user: deletedUser, message: 'User deleted successfully.' });
   } catch (error) {
     console.log(error);

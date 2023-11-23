@@ -12,7 +12,7 @@ const signin = async (req, res) => {
     //Authenticate the password
     if (!user.authenticate(req.body.password)) {
       return res
-        .status("401")
+        .status(401)
         .send({ error: "Email and password don't match." });
     }
     //Creating a JWT token and setting that token ina cookie 
@@ -28,7 +28,7 @@ const signin = async (req, res) => {
       },
     });
   } catch (err) {
-    return res.status("401").json({ error: "Could not sign in" });
+    return res.status(401).json({ error: "Could not sign in" });
   }
 };
 
@@ -49,13 +49,14 @@ const requireSignin = expressjwt({
 });
 
 //This middleware will check if the user has authorization 
-const hasAuthorization = (req, res) => {
+const hasAuthorization = (req, res, next) => {
   const authorized = req.profile && req.auth && req.profile._id == req.auth._id;
   if (!authorized) {
     return res.status(403).json({
       error: "User is not authorized!",
     });
   }
+  next();
 };
 export default { signin, signout, requireSignin, hasAuthorization };
 
