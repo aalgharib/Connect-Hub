@@ -12,6 +12,7 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import CommentIcon from "@mui/icons-material/Comment";
 import Avatar from "@mui/material/Avatar";
 import Logo from "../assets/logo.png";
+import PeopleIcon from "@mui/icons-material/People";
 
 // search bar styles
 const Search = styled("div")(({ theme }) => ({
@@ -91,6 +92,14 @@ const Navbar = () => {
             color="inherit"
           >
             <CommentIcon />
+          </IconButton>
+          <IconButton
+            size="large"
+            aria-label="account of current user"
+            aria-haspopup="true"
+            color="inherit"
+          >
+            <PeopleIcon />
           </IconButton>
           <IconButton
             size="large"
