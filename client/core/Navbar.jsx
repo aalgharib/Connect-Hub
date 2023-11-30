@@ -13,6 +13,7 @@ import CommentIcon from "@mui/icons-material/Comment";
 import Avatar from "@mui/material/Avatar";
 import Logo from "../assets/logo.png";
 import PeopleIcon from "@mui/icons-material/People";
+import LogoutIcon from "@mui/icons-material/Logout";
 
 // search bar styles
 const Search = styled("div")(({ theme }) => ({
@@ -118,13 +119,14 @@ const Navbar = () => {
               <AccountCircle />
             </IconButton>
           </Link>
+          {/* signout button*/}
           <IconButton
             size="large"
             edge="end"
             color="inherit"
             aria-label="open drawer"
           >
-            <MenuIcon />
+            <LogoutIcon />
           </IconButton>
         </Toolbar>
       </AppBar>
