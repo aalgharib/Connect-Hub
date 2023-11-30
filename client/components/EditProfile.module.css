@@ -1,0 +1,27 @@
+.card {
+  max-width: 600px;
+  margin: auto;
+  text-align: center;
+  margin-top: 40px;
+  padding-bottom: 16px;
+}
+
+.title {
+  margin: 16px;
+  color: #e2e2e2;
+}
+
+.error {
+  vertical-align: middle;
+}
+
+.textField {
+  margin-left: 8px;
+  margin-right: 8px;
+  width: 300px;
+}
+
+.submit {
+  margin: auto;
+  margin-bottom: 16px;
+}

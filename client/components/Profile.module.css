@@ -1,0 +1,11 @@
+.root {
+  max-width: 600px;
+  margin: auto;
+  padding: 16px;
+  margin-top: 40px;
+}
+
+.title {
+  margin-top: 24px;
+  color: #e0e0e0;
+}
