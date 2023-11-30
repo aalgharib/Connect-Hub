@@ -69,7 +69,7 @@ const Navbar = () => {
         }}
       >
         <Toolbar sx={{ maxHeight: "60px" }}>
-          <Link to="/home" style={{ color: "inherit" }}>
+          <Link to="/Home" style={{ color: "inherit" }}>
             <IconButton
               size="small"
               edge="start"

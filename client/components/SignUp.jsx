@@ -57,7 +57,7 @@ const SignUp = () => {
     });
   };
 if (values.redirectToProfile) {
-  return <Navigate to="/profile" />;
+  return <Navigate to="/Home" />;
 }
   // SignUp.propTypes = {
   //   open: PropTypes.bool.isRequired,
