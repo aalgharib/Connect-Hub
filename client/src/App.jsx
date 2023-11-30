@@ -6,6 +6,7 @@ import NoPage from "../core/NoPage.jsx";
 import Home from "../core/Home.jsx";
 import Profile from "../components/Profile.jsx";
 import Friends from "../components/Friends.jsx";
+import EditProfile from "../components/EditProfile.jsx";
 
 function App() {
   return (
@@ -15,6 +16,10 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/Home" element={<Home />} />
         <Route path="/profile" element={<Profile />} />
+        {/* <Route path="/profile/edit/:user_id" element={<EditProfile />} /> */}
+        {/* use the above route when adding functionalities */}
+        <Route path="/profile/edit" element={<EditProfile />} />
+        <Route path="/friends" element={<Friends />} />
         <Route path="/friends" element={<Friends />} />
         <Route path="*" element={<NoPage />} />
       </Routes>
