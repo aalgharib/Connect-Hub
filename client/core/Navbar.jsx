@@ -14,6 +14,9 @@ import Avatar from "@mui/material/Avatar";
 import Logo from "../assets/logo.png";
 import PeopleIcon from "@mui/icons-material/People";
 import LogoutIcon from "@mui/icons-material/Logout";
+import auth from "../lib/authHelper.js";
+// import { signout } from "./apiAuth.js";
+import { useNavigate } from "react-router";
 
 // search bar styles
 const Search = styled("div")(({ theme }) => ({
@@ -58,6 +61,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 // If you need to add authentication or something onto the icons, you need to add an action onto them
 // Maybe you need to use a different way instead of the Link
 const Navbar = () => {
+  const navigate = useNavigate();
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
@@ -125,6 +129,9 @@ const Navbar = () => {
             edge="end"
             color="inherit"
             aria-label="open drawer"
+            onClick={() => {
+              auth.clearJWT(() => navigate("/"));
+            }}
           >
             <LogoutIcon />
           </IconButton>

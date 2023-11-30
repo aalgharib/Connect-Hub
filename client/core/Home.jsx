@@ -1,14 +1,14 @@
 // import React from "react";
 import Navbar from "./Navbar";
 import Box from "@mui/material/Box";
-import { Button } from "@mui/material";
+// import { Button } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Avatar from "@mui/material/Avatar";
 import AvatarImage from "../assets/avatar_sample.jpg";
 import PostCard from "../components/PostCard";
-import auth from "../lib/authHelper.js";
+// import auth from "../lib/authHelper.js";
 // import { signout } from "./apiAuth.js";
-import { useNavigate } from "react-router";
+// import { useNavigate } from "react-router";
 // sample data for the posts
 const samplePosts = [
   { id: 1, content: "Test1." },
@@ -17,8 +17,8 @@ const samplePosts = [
 ];
 
 const Home = () => {
-  const navigate = useNavigate();
- 
+  // const navigate = useNavigate();
+
   return (
     <div>
       <Navbar />
@@ -47,8 +47,8 @@ const Home = () => {
           {samplePosts.map((post) => (
             <PostCard key={post.id} content={post.content} />
           ))}
-      {/* I added this just for testing the sign out ^u^ <Ali/> */}
-          <Button
+          {/* I added this just for testing the sign out ^u^ <Ali/> */}
+          {/* <Button
             variant="contained"
             color="primary"
             sx={{
@@ -61,7 +61,7 @@ const Home = () => {
             }}
           >
             Sign out
-          </Button>
+          </Button> */}
         </Box>
       </Box>
     </div>
