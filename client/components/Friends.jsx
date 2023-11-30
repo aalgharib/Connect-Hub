@@ -1,19 +1,18 @@
-import React from "react";
-import Navbar from "./Navbar";
+// import React from "react";
+import Navbar from "../core/Navbar";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Avatar from "@mui/material/Avatar";
 import AvatarImage from "../assets/avatar_sample.jpg";
-import PostCard from "./PostCard";
+import FriendsCard from "./FriendsCard";
 
-// sample data for the posts
-const samplePosts = [
-  { id: 1, content: "Test1." },
-  { id: 2, content: "Test2" },
-  { id: 3, content: "Test3" },
+const sampleFriends = [
+  { id: 1, name: "Name 1" },
+  { id: 2, name: "Name 2" },
+  { id: 3, name: "Name 3" },
 ];
 
-const Home = () => {
+const Friends = () => {
   return (
     <div>
       <Navbar />
@@ -39,8 +38,8 @@ const Home = () => {
         </Box>
         {/* Use real data for the posts */}
         <Box sx={{ flex: 2, bgcolor: "#ffffff", padding: 3 }}>
-          {samplePosts.map((post) => (
-            <PostCard key={post.id} content={post.content} />
+          {sampleFriends.map((friend) => (
+            <FriendsCard key={friend.id} content={friend.name} />
           ))}
         </Box>
       </Box>
@@ -48,4 +47,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Friends;

@@ -1,18 +1,18 @@
 import { Routes, Route } from "react-router-dom";
 // import "./App.css";
-import Signup from "./components/SignUp";
-import Login from "./components/login";
-import NoPage from "./components/NoPage";
-import Home from "./components/Home";
-import Profile from "./components/Profile";
-import Friends from "./components/Friends";
+import SignUp from "../components/SignUp.jsx";
+import Login from "../lib/Login.jsx";
+import NoPage from "../core/NoPage.jsx";
+import Home from "../core/Home.jsx";
+import Profile from "../components/Profile.jsx";
+import Friends from "../components/Friends.jsx";
 
 function App() {
   return (
     <>
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
+        <Route path="/signUp" element={<SignUp />} />
         <Route path="/Home" element={<Home />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/friends" element={<Friends />} />

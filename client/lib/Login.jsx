@@ -1,6 +1,6 @@
-import React from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import styles from "./Login.module.css";
+import styles from "../components/Login.module.css";
 import background from "../assets/logo.png";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -10,8 +10,57 @@ import Container from "@mui/material/Container";
 import InputAdornment from "@mui/material/InputAdornment";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import LockIcon from "@mui/icons-material/Lock";
+import auth from "./authHelper.js";
+import { Navigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import { signin } from "./apiAuth.js";
+// import PropTypes from "prop-types";
+//I deleted porps from Login(props)
+export default function Login() {
+  const location = useLocation();
+  console.log(location.state);
+  
+  const [values, setValues] = useState({
+    email: "",
+    password: "",
+    error: "",
+    redirectToReferrer: false,
+  });
 
-const Login = () => {
+  const clickSubmit = () => {
+    const user = {
+      email: values.email || undefined,
+      password: values.password || undefined,
+    };
+    console.log(user);
+    signin(user).then((data) => {
+      if (data.error) {
+        setValues({ ...values, error: data.error });
+      } else {
+        console.log(data);
+        auth.authenticate(data, () => {
+          setValues({ ...values, error: "", redirectToReferrer: true });
+        });
+      }
+    });
+    
+  };
+if (auth.isAuthenticated()) {
+      return <Navigate to="/Home" state={{ from: location.pathname }} />;
+    }
+  const handleChange = (name) => (event) => {
+    setValues({ ...values, [name]: event.target.value });
+  };
+
+  // const { from } = location.state || {
+  //   from: {
+  //     pathname: "/",
+  //   },
+  // };
+  // const { redirectToReferrer } = values;
+  // if (redirectToReferrer) {
+  //   return <Navigate to={from} />;
+  // }
   // Back ground logo style
   const backgroundStyle = {
     backgroundImage: `url(${background})`,
@@ -46,6 +95,12 @@ const Login = () => {
             }}
           >
             <TextField
+              id="email"
+              type="email"
+              // className={classes.textField}
+              value={values.email}
+              onChange={handleChange("email")}
+              margin="normal"
               variant="standard"
               fullWidth
               placeholder="Email ID"
@@ -73,10 +128,15 @@ const Login = () => {
               }}
             />
             <TextField
+              id="password"
+              type="password"
+              // className={classes.textField}
+              value={values.password}
+              onChange={handleChange("password")}
+              margin="normal"
               variant="standard"
               fullWidth
               placeholder="Password"
-              type="password"
               name="password"
               InputProps={{
                 startAdornment: (
@@ -108,11 +168,13 @@ const Login = () => {
                 width: "5rem",
                 borderRadius: "12rem",
               }}
+              onClick={clickSubmit}
+              // className={classes.submit}
             >
               Login
             </Button>
             <Typography sx={{ textAlign: "center" }}>
-              Don't have an account?
+              Do not have an account?
               <Link to="/signup">{" Sign Up!"}</Link>
             </Typography>
           </Box>
@@ -120,6 +182,5 @@ const Login = () => {
       </div>
     </div>
   );
-};
-
-export default Login;
+}
+// export default Login;

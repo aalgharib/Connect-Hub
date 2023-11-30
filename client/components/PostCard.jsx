@@ -1,13 +1,12 @@
-import React from "react";
+// import React from "react";
 import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
 import Avatar from "@mui/material/Avatar";
 import AvatarImage from "../assets/avatar_sample.jpg";
 import CardHeader from "@mui/material/CardHeader";
 
-// currently this component is same as postcard.jsx.
-// if there's almost no difference between them in the future, maybe we can merge them.
-const FriendsCard = (props) => {
+// user proper props for the card
+const PostCard = (props) => {
   return (
     <Card sx={{ maxWidth: 600, boxShadow: 3, margin: 1 }}>
       <CardHeader
@@ -32,4 +31,4 @@ const FriendsCard = (props) => {
   );
 };
 
-export default FriendsCard;
+export default PostCard;
