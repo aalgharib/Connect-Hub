@@ -16,10 +16,10 @@ import { useLocation } from "react-router-dom";
 import { signin } from "./apiAuth.js";
 // import PropTypes from "prop-types";
 //I deleted porps from Login(props)
-export default function Login() {
+export default function Login(props) {
   const location = useLocation();
   console.log(location.state);
-  
+
   const [values, setValues] = useState({
     email: "",
     password: "",
@@ -43,11 +43,16 @@ export default function Login() {
         });
       }
     });
-    
   };
-if (auth.isAuthenticated()) {
-      return <Navigate to="/Home" state={{ from: location.pathname }} />;
-    }
+  const { from } = location.state || {
+    from: {
+      pathname: "/Home",
+    },
+  };
+  const { redirectToReferrer } = values;
+  if (redirectToReferrer) {
+    return <Navigate to={from} />;
+  }
   const handleChange = (name) => (event) => {
     setValues({ ...values, [name]: event.target.value });
   };

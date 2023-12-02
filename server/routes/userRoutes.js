@@ -19,6 +19,7 @@ router
 
 // Param middleware for userId
 router.param("userId", userCtrl.findUserById);
-
+// router.param("userId", userCtrl.read);
+router.route("/api/users/:userId").get(userCtrl.read);
 
 export default router;
