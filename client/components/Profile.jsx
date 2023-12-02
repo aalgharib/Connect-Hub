@@ -19,16 +19,41 @@ import PersonIcon from "@mui/icons-material/Person";
 import Divider from "@mui/material/Divider";
 import { Link } from "react-router-dom";
 import DeleteUser from "./DeleteUser.jsx";
-
+// import ErrorBoundary from "../src/ErrorBoundary.jsx";
 const Profile = () => {
   const location = useLocation();
   const [user, setUser] = useState({});
   const [redirectToSignin, setRedirectToSignin] = useState(false);
   const jwt = auth.isAuthenticated();
   const { userId } = useParams();
+
   useEffect(() => {
+  //   const abortController = new AbortController();
+  //   const signal = abortController.signal;
+  //   if (userId) {
+  //     read(
+  //       {
+  //         userId: userId,
+  //       },
+  //       { t: jwt.token },
+  //       signal
+  //     ).then((data) => {
+  //       if (data && data.error) {
+  //         setRedirectToSignin(true);
+  //       } else {
+  //         setUser(data);
+  //       }
+  //     });
+  //   }
+  //   console.log("user id : " + (userId))
+
+  //   return function cleanup() {
+  //     abortController.abort();
+  //   };
+  // }, [userId, jwt.token]);
     const abortController = new AbortController();
     const signal = abortController.signal;
+
     read(
       {
         userId: userId,
@@ -46,15 +71,121 @@ const Profile = () => {
     return function cleanup() {
       abortController.abort();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userId]);
 
   if (redirectToSignin) {
     return <Navigate to="/" state={{ from: location.pathname }} replace />;
   }
-  if (auth.isAuthenticated()) {
-    console.log(auth.isAuthenticated().user._id);
-    console.log(user._id);
-  }
+   if (auth.isAuthenticated()) {
+     console.log(auth.isAuthenticated().user._id);
+     console.log(user._id);
+   }
+  // const location = useLocation();
+  // const [user, setUser] = useState({});
+  // const [redirectToSignin, setRedirectToSignin] = useState(false);
+  // const jwt = auth.isAuthenticated();
+  // const { userId } = useParams();
+  // const [loading, setLoading] = useState(true);
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const data = await read({ userId }, { t: jwt.token });
+
+  //       if (data.error) {
+  //         setRedirectToSignin(true);
+  //       } else {
+  //         setUser(data);
+  //       }
+  //     } catch (error) {
+  //       console.error("Error fetching user data:", error);
+  //       setRedirectToSignin(true);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+
+  //   fetchData();
+  // }, [userId, jwt.token]);
+
+  // if (redirectToSignin) {
+  //   return <Navigate to="/Home" state={{ from: location.pathname }} replace />;
+  // }
+
+  // if (loading) {
+  //   return <p>Loading...</p>;
+  // }
+
+  // useEffect(() => {
+  //   const abortController = new AbortController();
+  //   const signal = abortController.signal;
+  //   read(
+  //     {
+  //       userId: userId,
+  //     },
+  //     { t: jwt.token },
+  //     signal
+  //   ).then((data) => {
+  //     if (data && data.error) {
+  //       setRedirectToSignin(true);
+  //     } else {
+  //       setUser(data);
+  //     }
+
+  //   });
+
+  //   return function cleanup() {
+  //     abortController.abort();
+  //   };
+  // }, [userId]);
+
+  // if (redirectToSignin) {
+  //   return <Navigate to="/" state={{ from: location.pathname }} replace />;
+  // }
+  // if (auth.isAuthenticated()) {
+  //   console.log(auth.isAuthenticated().user._id);
+  //   console.log(user._id);
+  // }
+  // useEffect(() => {
+  //   const abortController = new AbortController();
+  //   const signal = abortController.signal;
+
+  //   const fetchData = async () => {
+  //     try {
+  //       const data = await read({ userId: userId }, { t: jwt.token }, signal);
+
+  //       if (data && data.error) {
+  //         setRedirectToSignin(true);
+  //       } else {
+  //         setUser(data);
+  //       }
+  //     } catch (error) {
+  //       console.error("Error fetching user data:", error);
+  //       // Handle error, e.g., setRedirectToSignin(true);
+  //     }
+  //   };
+
+  //   fetchData();
+
+  //   return function cleanup() {
+  //     abortController.abort();
+  //   };
+  // }, [userId, jwt.token]);
+
+  // if (redirectToSignin) {
+  //   return <Navigate to="/" state={{ from: location.pathname }} replace />;
+  // }
+  // if (auth.isAuthenticated()) {
+  //   console.log(auth.isAuthenticated().user._id);
+  //   console.log(user._id);
+  // }
+  // Make sure user is defined before accessing properties
+  // if (!user || !user._id) {
+  //   // Handle the case where user or user._id is not available
+  //   // This could be showing a loading state, redirecting, or displaying an error message
+  //   return <p>Loading...</p>;
+  // }
   return (
     <div>
       <Navbar />
@@ -69,7 +200,12 @@ const Profile = () => {
                 <PersonIcon />
               </Avatar>
             </ListItemAvatar>
-            <ListItemText primary={"test"} secondary={"test@test.com"} />{" "}
+            <ListItemText
+              primary={user && user.name ? user.name : "Name not available"}
+              secondary={
+                user && user.email ? user.email : "Email not available"
+              }
+            />{" "}
             {/* temp */}
             <ListItemSecondaryAction>
               <Link to={"/profile/edit"}>
@@ -80,7 +216,7 @@ const Profile = () => {
               <DeleteUser />
             </ListItemSecondaryAction>
             {/* Please implement the functionality here */}
-            {/* {auth.isAuthenticated().user &&
+            {auth.isAuthenticated().user &&
               auth.isAuthenticated().user._id == user._id && (
                 <ListItemSecondaryAction>
                   <Link to={"/user/edit/" + user._id}>
@@ -90,7 +226,7 @@ const Profile = () => {
                   </Link>
                   <DeleteUser userId={user._id} />
                 </ListItemSecondaryAction>
-              )} */}
+              )}
           </ListItem>
           <Divider />
           <ListItem>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Navbar from "../core/Navbar";
 import styles from "./EditProfile.module.css";
 import Card from "@mui/material/Card";
@@ -8,8 +8,17 @@ import Icon from "@mui/material/Icon";
 import TextField from "@mui/material/TextField";
 import CardActions from "@mui/material/CardActions";
 import Button from "@mui/material/Button";
-
-const EditProfile = () => {
+import { Navigate , useParams } from "react-router";
+import auth  from "../lib/authHelper";
+// import { useParams } from "react-router";
+import {  useEffect } from "react";
+import { update , read } from "./apiUser"
+const EditProfile = ({ match }) => {
+  const { userId } = useParams();
+  // const location = useLocation();
+  const [user, setUser] = useState({});
+  const [redirectToSignin, setRedirectToSignin] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [values, setValues] = useState({
     name: "",
     password: "",
@@ -17,12 +26,66 @@ const EditProfile = () => {
     open: false,
     error: "",
     redirectToProfile: false,
-  });
+  }) 
+  const jwt = auth.isAuthenticated()
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await read({ userId }, { t: jwt.token });
+
+        if (data.error) {
+          setRedirectToSignin(true);
+        } else {
+          setUser(data);
+        }
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+        setRedirectToSignin(true);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [userId, jwt.token]);
+
+  if (redirectToSignin) {
+    return <Navigate to="/Home" state={{ from: location.pathname }} replace />;
+  }
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+  const clickSubmit = () => {
+    const user = {
+      name: values.name || undefined,
+      email: values.email || undefined,
+      password: values.password || undefined,
+    };
+    update(
+      {
+        userId: userId,
+      },
+      {
+        t: jwt.token,
+      },
+      user
+    ).then((data) => {
+      if (data && data.error) {
+        setValues({ ...values, error: data.error });
+      } else {
+        setValues({ ...values, userId: data._id, redirectToProfile: true });
+      }
+    });
+  };
   const handleChange = (name) => (event) => {
     setValues({ ...values, [name]: event.target.value });
   };
 
+  if (values.redirectToProfile) {
+    return <Navigate to={"/user/" + values.userId} />;
+  }
   return (
     <div>
       <Navbar />
@@ -73,7 +136,7 @@ const EditProfile = () => {
           <Button
             color="primary"
             variant="contained"
-            // onClick={clickSubmit}
+            onClick={clickSubmit}
             className={styles.submit}
           >
             Update

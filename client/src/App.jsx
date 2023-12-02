@@ -16,7 +16,7 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/Home" element={<Home />} />
         <Route path="/profile" element={<Profile />} />
-        {/* <Route path="/profile/edit/:user_id" element={<EditProfile />} /> */}
+        <Route path="/profile/edit/:user_id" element={<EditProfile />} />
         {/* use the above route when adding functionalities */}
         <Route path="/profile/edit" element={<EditProfile />} />
         <Route path="/friends" element={<Friends />} />
