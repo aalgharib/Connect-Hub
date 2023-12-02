@@ -14,9 +14,11 @@ import auth from "./authHelper.js";
 import { Navigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { signin } from "./apiAuth.js";
+import { useNavigate } from "react-router-dom";
 // import PropTypes from "prop-types";
 //I deleted porps from Login(props)
 export default function Login(props) {
+  // const naviagte = useNavigate();
   const location = useLocation();
   console.log(location.state);
 
@@ -40,10 +42,12 @@ export default function Login(props) {
         console.log(data);
         auth.authenticate(data, () => {
           setValues({ ...values, error: "", redirectToReferrer: true });
+          // `/profile/${auth.isAuthenticated().user._id}`;
         });
       }
     });
   };
+
   const { from } = location.state || {
     from: {
       pathname: "/Home",
@@ -56,6 +60,7 @@ export default function Login(props) {
   const handleChange = (name) => (event) => {
     setValues({ ...values, [name]: event.target.value });
   };
+  
 
   // const { from } = location.state || {
   //   from: {
@@ -165,19 +170,21 @@ export default function Login(props) {
                 },
               }}
             />
-            <Button
-              variant="contained"
-              color="primary"
-              sx={{
-                height: "1.8rem",
-                width: "5rem",
-                borderRadius: "12rem",
-              }}
-              onClick={clickSubmit}
-              // className={classes.submit}
-            >
-              Login
-            </Button>
+            
+              <Button
+                variant="contained"
+                color="primary"
+                sx={{
+                  height: "1.8rem",
+                  width: "5rem",
+                  borderRadius: "12rem",
+                }}
+                onClick={clickSubmit}
+                // className={classes.submit}
+              >
+                Login
+              </Button>
+            
             <Typography sx={{ textAlign: "center" }}>
               Do not have an account?
               <Link to="/signup">{" Sign Up!"}</Link>

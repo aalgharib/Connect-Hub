@@ -1,9 +1,6 @@
 import { useState, useEffect } from "react";
 import Navbar from "../core/Navbar";
-import auth from "../lib/authHelper.js";
-import { read } from "./apiUser.js";
 import { useLocation, Navigate } from "react-router-dom";
-import { useParams } from "react-router-dom";
 import styles from "./Profile.module.css";
 import Paper from "@mui/material/Paper";
 import List from "@mui/material/List";
@@ -19,6 +16,9 @@ import PersonIcon from "@mui/icons-material/Person";
 import Divider from "@mui/material/Divider";
 import { Link } from "react-router-dom";
 import DeleteUser from "./DeleteUser.jsx";
+import auth from "../lib/authHelper.js";
+import { read } from "./apiUser.js";
+import { useParams } from "react-router-dom";
 // import ErrorBoundary from "../src/ErrorBoundary.jsx";
 const Profile = () => {
   const location = useLocation();
@@ -26,6 +26,7 @@ const Profile = () => {
   const [redirectToSignin, setRedirectToSignin] = useState(false);
   const jwt = auth.isAuthenticated();
   const { userId } = useParams();
+  
 
   useEffect(() => {
   //   const abortController = new AbortController();
@@ -53,17 +54,19 @@ const Profile = () => {
   // }, [userId, jwt.token]);
     const abortController = new AbortController();
     const signal = abortController.signal;
-
+    
     read(
       {
-        userId: userId,
+        userId : userId,
       },
       { t: jwt.token },
       signal
     ).then((data) => {
       if (data && data.error) {
+        console.log("error");
         setRedirectToSignin(true);
       } else {
+        console.log("Okay");
         setUser(data);
       }
     });
@@ -73,14 +76,43 @@ const Profile = () => {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userId]);
+  console.log("whatever-------------");
+console.log(userId);
+console.log("whatever-------------");
+console.log(jwt.token);
+// const abortController = new AbortController();
+// const signal = abortController.signal;
+// console.log("whatever");
+// console.log(userId);
+// console.log(jwt.token);
+// read(
+//   {
+//     userId: userId,
+//   },
+//   { t: jwt.token },
+//   signal
+// ).then((data) => {
+//   if (data && data.error) {
+//     setRedirectToSignin(true);
+//   } else {
+//     setUser(data);
+//   }
+// });
 
-  if (redirectToSignin) {
-    return <Navigate to="/" state={{ from: location.pathname }} replace />;
-  }
-   if (auth.isAuthenticated()) {
-     console.log(auth.isAuthenticated().user._id);
-     console.log(user._id);
-   }
+// return function cleanup() {
+//   abortController.abort();
+// };
+
+  // if (redirectToSignin) {
+  //   console.log("redirect");
+  //   return <Navigate to="/" state={{ from: location.pathname }} replace />;
+  // }
+  //  if (auth.isAuthenticated()) {
+    
+  //    console.log(auth.isAuthenticated().user._id);
+  //    console.log(user._id);
+  //    console.log("auth userId")
+  //  }
   // const location = useLocation();
   // const [user, setUser] = useState({});
   // const [redirectToSignin, setRedirectToSignin] = useState(false);
@@ -185,7 +217,8 @@ const Profile = () => {
   //   // Handle the case where user or user._id is not available
   //   // This could be showing a loading state, redirecting, or displaying an error message
   //   return <p>Loading...</p>;
-  // }
+  //}
+  
   return (
     <div>
       <Navbar />
@@ -216,7 +249,7 @@ const Profile = () => {
               <DeleteUser />
             </ListItemSecondaryAction>
             {/* Please implement the functionality here */}
-            {auth.isAuthenticated().user &&
+            {/* {auth.isAuthenticated().user &&
               auth.isAuthenticated().user._id == user._id && (
                 <ListItemSecondaryAction>
                   <Link to={"/user/edit/" + user._id}>
@@ -226,7 +259,7 @@ const Profile = () => {
                   </Link>
                   <DeleteUser userId={user._id} />
                 </ListItemSecondaryAction>
-              )}
+              )} */}
           </ListItem>
           <Divider />
           <ListItem>

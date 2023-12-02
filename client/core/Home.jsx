@@ -21,33 +21,33 @@ const samplePosts = [
 ];
 
 const Home = () => {
-//   const location = useLocation();
-//   const [user, setUser] = useState({});
-//   const [redirectToSignin, setRedirectToSignin] = useState(false);
-//   const jwt = auth.isAuthenticated();
-//   const { userId } = useParams();
-//   // useEffect(() => {
-//   //   const abortController = new AbortController();
-//   //   const signal = abortController.signal;
+  // const location = useLocation();
+  // const [user, setUser] = useState({});
+  // const [redirectToSignin, setRedirectToSignin] = useState(false);
+  // const jwt = auth.isAuthenticated();
+  // const { userId } = useParams();
+  // useEffect(() => {
+  //   const abortController = new AbortController();
+  //   const signal = abortController.signal;
 
-//   //   read(
-//   //     {
-//   //       userId: userId,
-//   //     },
-//   //     { t: jwt.token },
-//   //     signal
-//   //   ).then((data) => {
-//   //     if (data && data.error) {
-//   //       setRedirectToSignin(true);
-//   //     } else {
-//   //       setUser(data);
-//   //     }
-//   //   });
+  //   read(
+  //     {
+  //       userId: userId,
+  //     },
+  //     { t: jwt.token },
+  //     signal
+  //   ).then((data) => {
+  //     if (data && data.error) {
+  //       setRedirectToSignin(true);
+  //     } else {
+  //       setUser(data);
+  //     }
+  //   });
 
-//   //   return function cleanup() {
-//   //     abortController.abort();
-//   //   };
-//   // }, [userId]);
+  //   return function cleanup() {
+  //     abortController.abort();
+  //   };
+  // }, [userId]);
 // useEffect(() => {
 //   let isMounted = true;
 //   const abortController = new AbortController();
@@ -66,6 +66,7 @@ const Home = () => {
 //     isMounted = false;
 //     abortController.abort();
 //   };
+  
 // }, [userId]);
 
 //   if (redirectToSignin) {
@@ -77,6 +78,7 @@ const Home = () => {
 //     console.log(auth.isAuthenticated().user._id);
 //     console.log(user._id);
 //   }
+console.log()
   return (
     <div>
       <Navbar />
