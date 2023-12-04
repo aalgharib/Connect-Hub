@@ -1,9 +1,6 @@
 import { useState, useEffect } from "react";
 import Navbar from "../core/Navbar";
-import auth from "../lib/authHelper.js";
-import { read } from "./apiUser.js";
-import { useLocation, Navigate } from "react-router-dom";
-import { useParams } from "react-router-dom";
+import {  Navigate } from "react-router-dom";
 import styles from "./Profile.module.css";
 import Paper from "@mui/material/Paper";
 import List from "@mui/material/List";
@@ -19,51 +16,35 @@ import PersonIcon from "@mui/icons-material/Person";
 import Divider from "@mui/material/Divider";
 import { Link } from "react-router-dom";
 import DeleteUser from "./DeleteUser.jsx";
-// import ErrorBoundary from "../src/ErrorBoundary.jsx";
+import auth from "../lib/authHelper.js";
+import { read } from "./apiUser.js";
+import { useParams } from "react-router-dom";
+
 const Profile = () => {
-  const location = useLocation();
+  // const location = useLocation();
   const [user, setUser] = useState({});
   const [redirectToSignin, setRedirectToSignin] = useState(false);
   const jwt = auth.isAuthenticated();
   const { userId } = useParams();
+  
 
   useEffect(() => {
-  //   const abortController = new AbortController();
-  //   const signal = abortController.signal;
-  //   if (userId) {
-  //     read(
-  //       {
-  //         userId: userId,
-  //       },
-  //       { t: jwt.token },
-  //       signal
-  //     ).then((data) => {
-  //       if (data && data.error) {
-  //         setRedirectToSignin(true);
-  //       } else {
-  //         setUser(data);
-  //       }
-  //     });
-  //   }
-  //   console.log("user id : " + (userId))
-
-  //   return function cleanup() {
-  //     abortController.abort();
-  //   };
-  // }, [userId, jwt.token]);
+  
     const abortController = new AbortController();
     const signal = abortController.signal;
-
+    
     read(
       {
-        userId: userId,
+        userId : userId,
       },
       { t: jwt.token },
       signal
     ).then((data) => {
       if (data && data.error) {
+        console.log("error");
         setRedirectToSignin(true);
       } else {
+        console.log("Okay");
         setUser(data);
       }
     });
@@ -73,119 +54,18 @@ const Profile = () => {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userId]);
-
-  if (redirectToSignin) {
-    return <Navigate to="/" state={{ from: location.pathname }} replace />;
-  }
-   if (auth.isAuthenticated()) {
-     console.log(auth.isAuthenticated().user._id);
-     console.log(user._id);
-   }
-  // const location = useLocation();
-  // const [user, setUser] = useState({});
-  // const [redirectToSignin, setRedirectToSignin] = useState(false);
-  // const jwt = auth.isAuthenticated();
-  // const { userId } = useParams();
-  // const [loading, setLoading] = useState(true);
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const data = await read({ userId }, { t: jwt.token });
-
-  //       if (data.error) {
-  //         setRedirectToSignin(true);
-  //       } else {
-  //         setUser(data);
-  //       }
-  //     } catch (error) {
-  //       console.error("Error fetching user data:", error);
-  //       setRedirectToSignin(true);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, [userId, jwt.token]);
-
-  // if (redirectToSignin) {
-  //   return <Navigate to="/Home" state={{ from: location.pathname }} replace />;
-  // }
-
-  // if (loading) {
-  //   return <p>Loading...</p>;
-  // }
-
-  // useEffect(() => {
-  //   const abortController = new AbortController();
-  //   const signal = abortController.signal;
-  //   read(
-  //     {
-  //       userId: userId,
-  //     },
-  //     { t: jwt.token },
-  //     signal
-  //   ).then((data) => {
-  //     if (data && data.error) {
-  //       setRedirectToSignin(true);
-  //     } else {
-  //       setUser(data);
-  //     }
-
-  //   });
-
-  //   return function cleanup() {
-  //     abortController.abort();
-  //   };
-  // }, [userId]);
-
-  // if (redirectToSignin) {
-  //   return <Navigate to="/" state={{ from: location.pathname }} replace />;
-  // }
-  // if (auth.isAuthenticated()) {
-  //   console.log(auth.isAuthenticated().user._id);
-  //   console.log(user._id);
-  // }
-  // useEffect(() => {
-  //   const abortController = new AbortController();
-  //   const signal = abortController.signal;
-
-  //   const fetchData = async () => {
-  //     try {
-  //       const data = await read({ userId: userId }, { t: jwt.token }, signal);
-
-  //       if (data && data.error) {
-  //         setRedirectToSignin(true);
-  //       } else {
-  //         setUser(data);
-  //       }
-  //     } catch (error) {
-  //       console.error("Error fetching user data:", error);
-  //       // Handle error, e.g., setRedirectToSignin(true);
-  //     }
-  //   };
-
-  //   fetchData();
-
-  //   return function cleanup() {
-  //     abortController.abort();
-  //   };
-  // }, [userId, jwt.token]);
-
-  // if (redirectToSignin) {
-  //   return <Navigate to="/" state={{ from: location.pathname }} replace />;
-  // }
-  // if (auth.isAuthenticated()) {
-  //   console.log(auth.isAuthenticated().user._id);
-  //   console.log(user._id);
-  // }
-  // Make sure user is defined before accessing properties
-  // if (!user || !user._id) {
-  //   // Handle the case where user or user._id is not available
-  //   // This could be showing a loading state, redirecting, or displaying an error message
-  //   return <p>Loading...</p>;
-  // }
+  console.log("whatever-------------");
+console.log(userId);
+console.log("whatever-------------");
+console.log(jwt.token);
+if (redirectToSignin) {
+  return <Navigate to="/" state={{ from: location.pathname }} replace />;
+}
+if (auth.isAuthenticated()) {
+  console.log(auth.isAuthenticated().userId);
+  console.log(userId);
+}
+  
   return (
     <div>
       <Navbar />
@@ -217,14 +97,14 @@ const Profile = () => {
             </ListItemSecondaryAction>
             {/* Please implement the functionality here */}
             {auth.isAuthenticated().user &&
-              auth.isAuthenticated().user._id == user._id && (
+              auth.isAuthenticated().userId == userId && (
                 <ListItemSecondaryAction>
-                  <Link to={"/user/edit/" + user._id}>
+                  <Link to={"/profile/edit/" + userId}>
                     <IconButton aria-label="Edit" color="primary">
                       <EditIcon />
                     </IconButton>
                   </Link>
-                  <DeleteUser userId={user._id} />
+                  <DeleteUser userId={userId} />
                 </ListItemSecondaryAction>
               )}
           </ListItem>

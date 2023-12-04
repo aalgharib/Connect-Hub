@@ -1,11 +1,14 @@
-// import React from "react";
 import Navbar from "../core/Navbar";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Avatar from "@mui/material/Avatar";
 import AvatarImage from "../assets/avatar_sample.jpg";
 import FriendsCard from "./FriendsCard";
-
+import auth from "../lib/authHelper.js";
+import { read } from "./apiUser.js";
+import { useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Navigate } from "react-router-dom";
 const sampleFriends = [
   { id: 1, name: "Name 1" },
   { id: 2, name: "Name 2" },
@@ -13,6 +16,47 @@ const sampleFriends = [
 ];
 
 const Friends = () => {
+  const [user, setUser] = useState({});
+  const [redirectToSignin, setRedirectToSignin] = useState(false);
+  const jwt = auth.isAuthenticated();
+  const { userId } = useParams();
+
+  useEffect(() => {
+    const abortController = new AbortController();
+    const signal = abortController.signal;
+
+    read(
+      {
+        userId: userId,
+      },
+      { t: jwt.token },
+      signal
+    ).then((data) => {
+      if (data && data.error) {
+        console.log("error");
+        setRedirectToSignin(true);
+      } else {
+        console.log("Okay");
+        setUser(data);
+      }
+    });
+
+    return function cleanup() {
+      abortController.abort();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userId]);
+  console.log("whatever-------------");
+  console.log(userId);
+  console.log("whatever-------------");
+  console.log(jwt.token);
+  if (redirectToSignin) {
+    return <Navigate to="/" state={{ from: location.pathname }} replace />;
+  }
+  if (auth.isAuthenticated()) {
+    console.log(auth.isAuthenticated().userId);
+    console.log(userId);
+  }
   return (
     <div>
       <Navbar />
@@ -32,8 +76,12 @@ const Friends = () => {
               alt="avatar image"
               src={AvatarImage}
             />
-            <Typography variant="h6">Andrew Garfield</Typography>
-            <Typography variant="body2">2nd@gmail.com</Typography>
+            <Typography variant="h6">
+              {user && user.name ? user.name : "Name not available"}
+            </Typography>
+            <Typography variant="body2">
+              {user && user.email ? user.email : "Email not available"}
+            </Typography>
           </Box>
         </Box>
         {/* Use real data for the posts */}

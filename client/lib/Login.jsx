@@ -14,9 +14,13 @@ import auth from "./authHelper.js";
 import { Navigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { signin } from "./apiAuth.js";
+
+// import { useNavigate } from "react-router-dom";
 // import PropTypes from "prop-types";
 //I deleted porps from Login(props)
-export default function Login(props) {
+export default function Login() {
+  
+  // const naviagte = useNavigate();
   const location = useLocation();
   console.log(location.state);
 
@@ -46,27 +50,34 @@ export default function Login(props) {
   };
   const { from } = location.state || {
     from: {
-      pathname: "/Home",
+      pathname: "/Home/" + auth.isAuthenticated().user?._id,
     },
   };
   const { redirectToReferrer } = values;
   if (redirectToReferrer) {
-    return <Navigate to={from} />;
+    return (
+      <Navigate
+        to={from}
+      />
+    );
   }
-  const handleChange = (name) => (event) => {
-    setValues({ ...values, [name]: event.target.value });
-  };
-
   // const { from } = location.state || {
   //   from: {
-  //     pathname: "/",
+  //     pathname: "/Home/",
   //   },
   // };
   // const { redirectToReferrer } = values;
   // if (redirectToReferrer) {
-  //   return <Navigate to={from} />;
+  //   return (
+  //     <Navigate to={{ pathname: from, state: { userId: data.user._id } }} />
+  //   );
   // }
-  // Back ground logo style
+
+  
+  const handleChange = (name) => (event) => {
+    setValues({ ...values, [name]: event.target.value });
+  };
+
   const backgroundStyle = {
     backgroundImage: `url(${background})`,
     backgroundPosition: "center",
@@ -165,6 +176,7 @@ export default function Login(props) {
                 },
               }}
             />
+            {/* <Link to={"/Home/" + auth.isAuthenticated().user._id}> */}
             <Button
               variant="contained"
               color="primary"
@@ -174,10 +186,12 @@ export default function Login(props) {
                 borderRadius: "12rem",
               }}
               onClick={clickSubmit}
+
               // className={classes.submit}
             >
               Login
             </Button>
+            {/* </Link> */}
             <Typography sx={{ textAlign: "center" }}>
               Do not have an account?
               <Link to="/signup">{" Sign Up!"}</Link>

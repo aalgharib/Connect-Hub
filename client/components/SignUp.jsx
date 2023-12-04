@@ -1,4 +1,4 @@
-import { useState}  from "react";
+import { useState } from "react";
 import styles from "./Login.module.css";
 import background from "../assets/logo.png";
 import Button from "@mui/material/Button";
@@ -13,6 +13,7 @@ import { Link } from "react-router-dom";
 // import PropTypes from "prop-types";
 import { registerUser } from "./apiUser";
 import { Navigate } from "react-router-dom";
+
 // import { useParams } from "react-router-dom";
 // import { useHistory } from "react-router-dom";
 const SignUp = () => {
@@ -48,17 +49,12 @@ const SignUp = () => {
         setValues({ ...values, error: data.error });
       } else {
         setValues({ ...values, error: "", redirectToProfile: true });
-        // setOpen(true);
-        // history.push("/profile");
-        // return <Navigate to={"/Home/"} />;
-        // Navigate("/profile/" + values.userId);
-      //  <Navigate to={"/profile/" + values.userId} />;
       }
     });
   };
-if (values.redirectToProfile) {
-  return <Navigate to="/Home" />;
-}
+  if (values.redirectToProfile) {
+    return <Navigate to="/" />;
+  }
   // SignUp.propTypes = {
   //   open: PropTypes.bool.isRequired,
   //   handleClose: PropTypes.func.isRequired,
@@ -76,9 +72,9 @@ if (values.redirectToProfile) {
     justifyContent: "center",
     alignItems: "center",
   };
-// if (values.redirectToProfile) {
-//   return <Navigate to={"/Home/" + values.userId} />;
-// }
+  // if (values.redirectToProfile) {
+  //   return <Navigate to={"/Home/" + values.userId} />;
+  // }
   return (
     <div>
       <div style={backgroundStyle}>
