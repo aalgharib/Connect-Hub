@@ -6,7 +6,7 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import InputBase from "@mui/material/InputBase";
-import MenuIcon from "@mui/icons-material/Menu";
+// import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import CommentIcon from "@mui/icons-material/Comment";
@@ -15,7 +15,7 @@ import Logo from "../assets/logo.png";
 import PeopleIcon from "@mui/icons-material/People";
 import LogoutIcon from "@mui/icons-material/Logout";
 import auth from "../lib/authHelper.js";
-// import { signout } from "./apiAuth.js";
+import { signout } from "../lib/apiAuth.js";
 import { useNavigate } from "react-router";
 
 // search bar styles
@@ -62,6 +62,13 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 // Maybe you need to use a different way instead of the Link
 const Navbar = () => {
   const navigate = useNavigate();
+  const handleSignout = async () => {
+    const result = await signout().then(
+      navigate("/")
+    );
+    // Handle the result or perform additional actions if needed
+    console.log(result);
+  };
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
@@ -74,7 +81,10 @@ const Navbar = () => {
         }}
       >
         <Toolbar sx={{ maxHeight: "60px" }}>
-          <Link to="/Home" style={{ color: "inherit" }}>
+          <Link
+            to={"/Home/" + auth.isAuthenticated().user._id}
+            style={{ color: "inherit" }}
+          >
             <IconButton
               size="small"
               edge="start"
@@ -96,14 +106,19 @@ const Navbar = () => {
             />
           </Search>
           <Box sx={{ flexGrow: 1 }} />
-          <IconButton
-            size="large"
-            aria-label="show 4 new mails"
-            color="inherit"
+          <Link to={"/posts/"}>
+            <IconButton
+              size="large"
+              aria-label="show 4 new mails"
+              color="inherit"
+            >
+              <CommentIcon />
+            </IconButton>
+          </Link>
+          <Link
+            to={"/friends/" + auth.isAuthenticated().user._id}
+            style={{ color: "inherit" }}
           >
-            <CommentIcon />
-          </IconButton>
-          <Link to="/friends" style={{ color: "inherit" }}>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -113,7 +128,10 @@ const Navbar = () => {
               <PeopleIcon />
             </IconButton>
           </Link>
-          <Link to="/profile" style={{ color: "inherit" }}>
+          <Link
+            to={"/profile/" + auth.isAuthenticated().user._id}
+            style={{ color: "inherit" }}
+          >
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -129,9 +147,7 @@ const Navbar = () => {
             edge="end"
             color="inherit"
             aria-label="open drawer"
-            onClick={() => {
-              auth.clearJWT(() => navigate("/"));
-            }}
+            onClick={handleSignout}
           >
             <LogoutIcon />
           </IconButton>

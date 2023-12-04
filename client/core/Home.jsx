@@ -1,16 +1,15 @@
-// import React from "react";
+import {useEffect , useState} from "react";
 import Navbar from "./Navbar";
 import Box from "@mui/material/Box";
-// import { Button } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Avatar from "@mui/material/Avatar";
 import AvatarImage from "../assets/avatar_sample.jpg";
 import PostCard from "../components/PostCard";
 // import { useState, useEffect } from "react";
-// import auth from "../lib/authHelper.js";
-// import { read } from "../components/apiUser.js";
-// import { useLocation, Navigate } from "react-router-dom";
-// import { useParams } from "react-router-dom";
+import auth from "../lib/authHelper.js";
+import { read } from "../components/apiUser.js";
+import {  Navigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 // import { signout } from "./apiAuth.js";
 // import { useNavigate } from "react-router";
 // sample data for the posts
@@ -21,64 +20,47 @@ const samplePosts = [
 ];
 
 const Home = () => {
-  // const location = useLocation();
-  // const [user, setUser] = useState({});
-  // const [redirectToSignin, setRedirectToSignin] = useState(false);
-  // const jwt = auth.isAuthenticated();
-  // const { userId } = useParams();
-  // useEffect(() => {
-  //   const abortController = new AbortController();
-  //   const signal = abortController.signal;
+    const [user, setUser] = useState({});
+    const [redirectToSignin, setRedirectToSignin] = useState(false);
+    const jwt = auth.isAuthenticated();
+    const { userId } = useParams();
+    useEffect(() => {
+      const abortController = new AbortController();
+      const signal = abortController.signal;
 
-  //   read(
-  //     {
-  //       userId: userId,
-  //     },
-  //     { t: jwt.token },
-  //     signal
-  //   ).then((data) => {
-  //     if (data && data.error) {
-  //       setRedirectToSignin(true);
-  //     } else {
-  //       setUser(data);
-  //     }
-  //   });
+      read(
+        {
+          userId: userId,
+        },
+        { t: jwt.token },
+        signal
+      ).then((data) => {
+        if (data && data.error) {
+          console.log("error");
+          setRedirectToSignin(true);
+        } else {
+          console.log("Okay");
+          setUser(data);
+        }
+      });
 
-  //   return function cleanup() {
-  //     abortController.abort();
-  //   };
-  // }, [userId]);
-// useEffect(() => {
-//   let isMounted = true;
-//   const abortController = new AbortController();
-//   const signal = abortController.signal;
-//   read({ userId: userId }, { t: jwt.token }, signal).then((data) => {
-//     if (isMounted) {
-//       if (data && data.error) {
-//         setRedirectToSignin(true);
-//       } else {
-//         setUser(data);
-//       }
-//     }
-//   });
+      return function cleanup() {
+        abortController.abort();
+      };
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [userId]);
+    console.log("whatever-------------");
+    console.log(userId);
+    console.log("whatever-------------");
+    console.log(jwt.token);
+    if (redirectToSignin) {
+      return <Navigate to="/" state={{ from: location.pathname }} replace />;
+    }
+    if (auth.isAuthenticated()) {
+      console.log(auth.isAuthenticated().user._id);
+      console.log(userId);
+    }
 
-//   return function cleanup() {
-//     isMounted = false;
-//     abortController.abort();
-//   };
-  
-// }, [userId]);
-
-//   if (redirectToSignin) {
-//     return (
-//       <Navigate to="/" state={{ from: location.pathname }} replace />
-//     );
-//   }
-//   if (auth.isAuthenticated()) {
-//     console.log(auth.isAuthenticated().user._id);
-//     console.log(user._id);
-//   }
-console.log()
   return (
     <div>
       <Navbar />
@@ -98,8 +80,13 @@ console.log()
               alt="avatar image"
               src={AvatarImage}
             />
-            <Typography variant="h6">user.name</Typography>
-            <Typography variant="body2">user.email</Typography>
+            <Typography variant="h6">
+              {user && user.name ? user.name : "Name not available"}
+            </Typography>
+            <Typography variant="body2">
+              
+              {user && user.email ? user.email : "Email not available"}
+            </Typography>
           </Box>
         </Box>
         {/* Use real data for the posts */}
@@ -107,21 +94,6 @@ console.log()
           {samplePosts.map((post) => (
             <PostCard key={post.id} content={post.content} />
           ))}
-          {/* I added this just for testing the sign out ^u^ <Ali/> */}
-          {/* <Button
-            variant="contained"
-            color="primary"
-            sx={{
-              height: "1.8rem",
-              width: "5rem",
-              borderRadius: "12rem",
-            }}
-            onClick={() => {
-              auth.clearJWT(() => navigate("/"));
-            }}
-          >
-            Sign out
-          </Button> */}
         </Box>
       </Box>
     </div>
