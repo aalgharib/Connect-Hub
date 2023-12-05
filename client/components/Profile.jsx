@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Navbar from "../core/Navbar";
-import {  Navigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import styles from "./Profile.module.css";
 import Paper from "@mui/material/Paper";
 import List from "@mui/material/List";
@@ -26,16 +26,14 @@ const Profile = () => {
   const [redirectToSignin, setRedirectToSignin] = useState(false);
   const jwt = auth.isAuthenticated();
   const { userId } = useParams();
-  
 
   useEffect(() => {
-  
     const abortController = new AbortController();
     const signal = abortController.signal;
-    
+
     read(
       {
-        userId : userId,
+        userId: userId,
       },
       { t: jwt.token },
       signal
@@ -55,17 +53,17 @@ const Profile = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userId]);
   console.log("whatever-------------");
-console.log(userId);
-console.log("whatever-------------");
-console.log(jwt.token);
-if (redirectToSignin) {
-  return <Navigate to="/" state={{ from: location.pathname }} replace />;
-}
-if (auth.isAuthenticated()) {
-  console.log(auth.isAuthenticated().userId);
   console.log(userId);
-}
-  
+  console.log("whatever-------------");
+  console.log(jwt.token);
+  if (redirectToSignin) {
+    return <Navigate to="/" state={{ from: location.pathname }} replace />;
+  }
+  if (auth.isAuthenticated()) {
+    console.log(auth.isAuthenticated().userId);
+    console.log(userId);
+  }
+
   return (
     <div>
       <Navbar />
@@ -98,6 +96,14 @@ if (auth.isAuthenticated()) {
             {/* Please implement the functionality here */}
             {auth.isAuthenticated().user &&
               auth.isAuthenticated().userId == userId && (
+                // <ListItemSecondaryAction>
+                //   <Link to={"/profile/edit/" + auth.isAuthenticated().userId}>
+                //     <IconButton aria-label="Edit" color="primary">
+                //       <EditIcon />
+                //     </IconButton>
+                //   </Link>
+                //   <DeleteUser userId={auth.isAuthenticated().userId} />
+                // </ListItemSecondaryAction>
                 <ListItemSecondaryAction>
                   <Link to={"/profile/edit/" + userId}>
                     <IconButton aria-label="Edit" color="primary">

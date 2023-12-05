@@ -15,10 +15,6 @@ import {  useEffect } from "react";
 import { update , read } from "./apiUser"
 const EditProfile = ({ match }) => {
   const { userId } = useParams();
-  // const location = useLocation();
-  const [user, setUser] = useState({});
-  const [redirectToSignin, setRedirectToSignin] = useState(false);
-  const [loading, setLoading] = useState(true);
   const [values, setValues] = useState({
     name: "",
     password: "",
@@ -26,37 +22,32 @@ const EditProfile = ({ match }) => {
     open: false,
     error: "",
     redirectToProfile: false,
-  }) 
-  const jwt = auth.isAuthenticated()
+  });
+  const jwt = auth.isAuthenticated();
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await read({ userId }, { t: jwt.token });
+    const abortController = new AbortController();
+    const signal = abortController.signal;
 
-        if (data.error) {
-          setRedirectToSignin(true);
-        } else {
-          setUser(data);
-        }
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-        setRedirectToSignin(true);
-      } finally {
-        setLoading(false);
+    read(
+      {
+        userId: userId,
+      },
+      { t: jwt.token },
+      signal
+    ).then((data) => {
+      if (data && data.error) {
+        setValues({ ...values, error: data.error });
+      } else {
+        setValues({ ...values, name: data.name, email: data.email });
       }
+    });
+    return function cleanup() {
+      abortController.abort();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userId]);
 
-    fetchData();
-  }, [userId, jwt.token]);
-
-  if (redirectToSignin) {
-    return <Navigate to="/Home" state={{ from: location.pathname }} replace />;
-  }
-
-  if (loading) {
-    return <p>Loading...</p>;
-  }
   const clickSubmit = () => {
     const user = {
       name: values.name || undefined,
@@ -84,7 +75,7 @@ const EditProfile = ({ match }) => {
   };
 
   if (values.redirectToProfile) {
-    return <Navigate to={"/user/" + values.userId} />;
+    return <Navigate to={"/profile/" + values.userId} />;
   }
   return (
     <div>
