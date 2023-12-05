@@ -1,4 +1,5 @@
-import  { useState } from "react";
+import { useState } from "react";
+import PropTypes from "prop-types";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Dialog from "@mui/material/Dialog";
@@ -10,10 +11,13 @@ import Button from "@mui/material/Button";
 import { Navigate } from "react-router";
 import auth from "../lib/authHelper";
 import { deleteUser } from "./apiUser";
-const DeleteUser = () => {
+// import { signout } from "../lib/apiAuth.js";
+import { useNavigate } from "react-router";
+
+export default function DeleteUser(props) {
   const [open, setOpen] = useState(false);
   const [redirect, setRedirect] = useState(false);
-
+  const navigate = useNavigate();
   const jwt = auth.isAuthenticated();
   const clickButton = () => {
     setOpen(true);
@@ -21,7 +25,7 @@ const DeleteUser = () => {
   const deleteAccount = () => {
     deleteUser(
       {
-        userId: props.userId,
+        userId: auth.isAuthenticated().user._id,
       },
       { t: jwt.token }
     ).then((data) => {
@@ -29,16 +33,17 @@ const DeleteUser = () => {
         console.log(data.error);
       } else {
         auth.clearJWT(() => console.log("deleted"));
+        navigate("/");
         setRedirect(true);
       }
     });
   };
+  console.log("This is the user Id" + auth.isAuthenticated().user._id);
   const handleRequestClose = () => {
     setOpen(false);
   };
-
   if (redirect) {
-    return <Navigate to="/Home" />;
+    return <Navigate to="/" />;
   }
   return (
     <span>
@@ -66,6 +71,8 @@ const DeleteUser = () => {
       </Dialog>
     </span>
   );
-};
+}
 
-export default DeleteUser;
+DeleteUser.propTypes = {
+  userId: PropTypes.string.isRequired,
+};

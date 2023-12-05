@@ -8,6 +8,7 @@ import Posts from "../components/Posts.jsx";
 import Profile from "../components/Profile.jsx";
 import Friends from "../components/Friends.jsx";
 import EditProfile from "../components/EditProfile.jsx";
+import PrivateRoute from "../lib/PrivateRoute.jsx";
 
 function App() {
   return (
@@ -15,13 +16,16 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
-        
+
         {/* this is a test router<Ali/> */}
         <Route path="/posts/" element={<Posts />} />
         <Route path="/Home/:userId" element={<Home />} />
         {/* <Route path="/profile" element={<Profile />} /> */}
         <Route path="/profile/:userId" element={<Profile />} />
-        <Route path="/profile/edit/:user_id" element={<EditProfile />} />
+        <Route path="/profile/edit/:user_id" element={<PrivateRoute>
+          <EditProfile />
+          </PrivateRoute>} />
+
         {/* use the above route when adding functionalities */}
         <Route path="/profile/edit" element={<EditProfile />} />
         {/* <Route path="/friends" element={<Friends />} /> */}
