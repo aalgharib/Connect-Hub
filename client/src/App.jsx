@@ -9,6 +9,7 @@ import Profile from "../components/Profile.jsx";
 import Friends from "../components/Friends.jsx";
 import EditProfile from "../components/EditProfile.jsx";
 import DeleteUser from "../components/DeleteUser.jsx";
+import PrivateRoute from "../lib/PrivateRoute.jsx";
 
 function App() {
   return (
@@ -22,8 +23,10 @@ function App() {
         <Route path="/Home/:userId" element={<Home />} />
         {/* <Route path="/profile" element={<Profile />} /> */}
         <Route path="/profile/:userId" element={<Profile />} />
-        <Route path="/profile/edit/:user_id" element={<EditProfile />} />
-        <Route path="/profile/delete/:user_id" element={<DeleteUser />} />
+        <Route path="/profile/edit/:user_id" element={<PrivateRoute>
+          <EditProfile />
+          </PrivateRoute>} />
+
         {/* use the above route when adding functionalities */}
         <Route path="/profile/edit" element={<EditProfile />} />
         {/* <Route path="/friends" element={<Friends />} /> */}

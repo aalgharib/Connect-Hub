@@ -3,7 +3,7 @@ import {  Navigate, useLocation } from "react-router-dom";
 import auth from "./authHelper";
 import PropTypes from "prop-types";
 
-const PrivateRoute = ({ children, ...rest }) => {
+export default function PrivateRoute ({ children, ...rest }) {
   const location = useLocation();
 
   return auth.isAuthenticated() ? (
@@ -11,6 +11,8 @@ const PrivateRoute = ({ children, ...rest }) => {
   ) : (
     <Navigate to="/" state={{ from: location }} replace />
   );
-};
+}
 
-export default PrivateRoute;
+//  PrivateRoute.propTypes = {
+//    children: PropTypes.string.isRequired,
+//  };
