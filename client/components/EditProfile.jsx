@@ -31,7 +31,7 @@ const EditProfile = ({ match }) => {
 
     read(
       {
-        userId: userId,
+        userId: auth.isAuthenticated().user._id,
       },
       { t: jwt.token },
       signal
@@ -56,7 +56,7 @@ const EditProfile = ({ match }) => {
     };
     update(
       {
-        userId: userId,
+        userId: auth.isAuthenticated().user._id,
       },
       {
         t: jwt.token,
@@ -75,7 +75,7 @@ const EditProfile = ({ match }) => {
   };
 
   if (values.redirectToProfile) {
-    return <Navigate to={"/profile/" + values.userId} />;
+    return <Navigate to={"/profile/" + auth.isAuthenticated().user._id} />;
   }
   return (
     <div>

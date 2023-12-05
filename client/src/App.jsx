@@ -8,7 +8,6 @@ import Posts from "../components/Posts.jsx";
 import Profile from "../components/Profile.jsx";
 import Friends from "../components/Friends.jsx";
 import EditProfile from "../components/EditProfile.jsx";
-import DeleteUser from "../components/DeleteUser.jsx";
 import PrivateRoute from "../lib/PrivateRoute.jsx";
 
 function App() {
