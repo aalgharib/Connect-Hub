@@ -64,12 +64,12 @@ const SignUp = () => {
     backgroundImage: `url(${background})`,
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
-    backgroundSize: "cover",
+    backgroundSize: "600px 600px",
     height: "100vh",
     width: "100%",
     display: "flex",
     flexDirection: "column",
-    justifyContent: "center",
+    justifyContent: "flex-start",
     alignItems: "center",
   };
   // if (values.redirectToProfile) {
@@ -78,10 +78,14 @@ const SignUp = () => {
   return (
     <div>
       <div style={backgroundStyle}>
-        <Typography>Create a Connect Hub Account</Typography>
+        <Typography
+          sx={{ marginTop: "2rem", marginBottom: "2rem", fontWeight: "bold" }}
+        >
+          Create a Connect Hub Account
+        </Typography>
 
         {/* Form */}
-        <Container className={styles.container}>
+        <Container className={styles.containerSignup}>
           <Box
             className={styles.transparentBoxBackground}
             sx={{
@@ -100,7 +104,7 @@ const SignUp = () => {
               onChange={handleChange("name")}
               variant="standard"
               fullWidth
-              placeholder="First name"
+              placeholder="Name"
               type="text"
               name="firstName"
               InputProps={{
@@ -115,7 +119,7 @@ const SignUp = () => {
                         margin: "0 6px 0 6px",
                       }}
                     >
-                      F
+                      N
                     </span>
                   </InputAdornment>
                 ),
@@ -134,7 +138,7 @@ const SignUp = () => {
                 },
               }}
             />
-            <TextField
+            {/* <TextField
               variant="standard"
               fullWidth
               placeholder="Last name"
@@ -170,7 +174,7 @@ const SignUp = () => {
                   color: "#fff",
                 },
               }}
-            />
+            /> */}
             <TextField
               id="email"
               value={values.email}
@@ -247,6 +251,16 @@ const SignUp = () => {
             </Typography>
           </Box>
         </Container>
+        <Box className={styles.bottomLogo}>
+          <Typography sx={{ fontSize: "0.6rem", fontWeight: "bold" }}>
+            Powered By:
+          </Typography>
+          <Typography sx={{ fontSize: "0.6rem" }}>{"</>"}</Typography>
+          <Typography sx={{ fontSize: "0.6rem", fontWeight: "bold" }}>
+            NodeNinjas
+          </Typography>
+          <Typography sx={{ fontSize: "0.5rem" }}>Est.2023</Typography>
+        </Box>
       </div>
     </div>
   );

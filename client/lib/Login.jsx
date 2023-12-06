@@ -19,7 +19,6 @@ import { signin } from "./apiAuth.js";
 // import PropTypes from "prop-types";
 //I deleted porps from Login(props)
 export default function Login() {
-  
   // const naviagte = useNavigate();
   const location = useLocation();
   console.log(location.state);
@@ -55,11 +54,7 @@ export default function Login() {
   };
   const { redirectToReferrer } = values;
   if (redirectToReferrer) {
-    return (
-      <Navigate
-        to={from}
-      />
-    );
+    return <Navigate to={from} />;
   }
   // const { from } = location.state || {
   //   from: {
@@ -73,7 +68,6 @@ export default function Login() {
   //   );
   // }
 
-  
   const handleChange = (name) => (event) => {
     setValues({ ...values, [name]: event.target.value });
   };
@@ -82,22 +76,27 @@ export default function Login() {
     backgroundImage: `url(${background})`,
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
-    backgroundSize: "cover",
+    backgroundSize: "600px 600px",
     height: "100vh",
     width: "100%",
     display: "flex",
     flexDirection: "column",
-    justifyContent: "center",
+    justifyContent: "flex-start",
     alignItems: "center",
+    position: "relative",
   };
 
   return (
     <div>
       <div style={backgroundStyle}>
-        <Typography>Login to Connect Hub</Typography>
+        <Typography
+          sx={{ marginTop: "2rem", marginBottom: "2rem", fontWeight: "bold" }}
+        >
+          Login to Connect Hub
+        </Typography>
 
         {/* Form */}
-        <Container className={styles.container}>
+        <Container className={styles.containerLogin}>
           <Box
             className={styles.transparentBoxBackground}
             sx={{
@@ -113,10 +112,8 @@ export default function Login() {
             <TextField
               id="email"
               type="email"
-              // className={classes.textField}
               value={values.email}
               onChange={handleChange("email")}
-              margin="normal"
               variant="standard"
               fullWidth
               placeholder="Email ID"
@@ -138,18 +135,15 @@ export default function Login() {
               }}
               InputLabelProps={{
                 sx: {
-                  color: "#fff", // Replace with your desired color
-                  // Add additional styles if needed
+                  color: "#fff",
                 },
               }}
             />
             <TextField
               id="password"
               type="password"
-              // className={classes.textField}
               value={values.password}
               onChange={handleChange("password")}
-              margin="normal"
               variant="standard"
               fullWidth
               placeholder="Password"
@@ -171,8 +165,7 @@ export default function Login() {
               }}
               InputLabelProps={{
                 sx: {
-                  color: "#fff", // Replace with your desired color
-                  // Add additional styles if needed
+                  color: "#fff",
                 },
               }}
             />
@@ -198,6 +191,16 @@ export default function Login() {
             </Typography>
           </Box>
         </Container>
+        <Box className={styles.bottomLogo}>
+          <Typography sx={{ fontSize: "0.6rem", fontWeight: "bold" }}>
+            Powered By:
+          </Typography>
+          <Typography sx={{ fontSize: "0.6rem" }}>{"</>"}</Typography>
+          <Typography sx={{ fontSize: "0.6rem", fontWeight: "bold" }}>
+            NodeNinjas
+          </Typography>
+          <Typography sx={{ fontSize: "0.5rem" }}>Est.2023</Typography>
+        </Box>
       </div>
     </div>
   );

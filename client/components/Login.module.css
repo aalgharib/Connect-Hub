@@ -1,6 +1,11 @@
-.container {
-  max-width: 60%;
-  height: 200px;
+.containerLogin {
+  max-width: 350px;
+  max-height: 180px;
+}
+
+.containerSignup {
+  max-width: 350px;
+  max-height: 200px;
 }
 
 .transparentBoxBackground {
@@ -19,4 +24,13 @@
   opacity: 0.9;
   z-index: -1;
   border-radius: 16px;
+}
+
+.bottomLogo {
+  position: absolute;
+  bottom: 2%;
+  width: 100%;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.8);
+  /* padding: 10px; */
 }
