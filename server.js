@@ -22,7 +22,7 @@ mongoose.connection.on("connected", () => {
 mongoose.connection.on("error", (err) => {
   console.log("Mongoose Default Connection Error : " + err);
 });
-///////////////////////////
+
 const app = express();
 const CURRENT_WORKING_DIR = process.cwd();
 console.log(CURRENT_WORKING_DIR);
