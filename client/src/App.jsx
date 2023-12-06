@@ -22,9 +22,14 @@ function App() {
         <Route path="/Home/:userId" element={<Home />} />
         {/* <Route path="/profile" element={<Profile />} /> */}
         <Route path="/profile/:userId" element={<Profile />} />
-        <Route path="/profile/edit/:user_id" element={<PrivateRoute>
-          <EditProfile />
-          </PrivateRoute>} />
+        <Route
+          path="/profile/edit/:userId"
+          element={
+            <PrivateRoute>
+              <EditProfile />
+            </PrivateRoute>
+          }
+        />
 
         {/* use the above route when adding functionalities */}
         <Route path="/profile/edit" element={<EditProfile />} />
