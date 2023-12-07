@@ -76,7 +76,7 @@ export default function Login() {
     backgroundImage: `url(${background})`,
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
-    backgroundSize: "600px 600px",
+    backgroundSize: "550px 550px",
     height: "100vh",
     width: "100%",
     display: "flex",
@@ -120,7 +120,10 @@ export default function Login() {
               name="email"
               InputProps={{
                 startAdornment: (
-                  <InputAdornment position="start">
+                  <InputAdornment
+                    position="start"
+                    sx={{ background: "#aed8e6", height: "100%" }}
+                  >
                     <AccountCircle />
                   </InputAdornment>
                 ),
@@ -128,10 +131,11 @@ export default function Login() {
               }}
               sx={{
                 backgroundColor: "#005aaa",
-                borderRadius: "4px",
+                // borderRadius: "4px",
                 input: {
                   color: "#fff",
                 },
+                margin: "5px 0 5px 0",
               }}
               InputLabelProps={{
                 sx: {
@@ -150,7 +154,10 @@ export default function Login() {
               name="password"
               InputProps={{
                 startAdornment: (
-                  <InputAdornment position="start">
+                  <InputAdornment
+                    position="start"
+                    sx={{ background: "#aed8e6", height: "100%" }}
+                  >
                     <LockIcon />
                   </InputAdornment>
                 ),
@@ -158,10 +165,11 @@ export default function Login() {
               }}
               sx={{
                 backgroundColor: "#005aaa",
-                borderRadius: "4px",
+                // borderRadius: "4px",
                 input: {
                   color: "#fff",
                 },
+                margin: "5px 0 5px 0",
               }}
               InputLabelProps={{
                 sx: {
@@ -177,6 +185,7 @@ export default function Login() {
                 height: "1.8rem",
                 width: "5rem",
                 borderRadius: "12rem",
+                margin: "5px 0 5px 0",
               }}
               onClick={clickSubmit}
 
@@ -185,7 +194,7 @@ export default function Login() {
               Login
             </Button>
             {/* </Link> */}
-            <Typography sx={{ textAlign: "center" }}>
+            <Typography sx={{ textAlign: "center", margin: "5px 0 5px 0" }}>
               Do not have an account?
               <Link to="/signup">{" Sign Up!"}</Link>
             </Typography>

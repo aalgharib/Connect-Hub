@@ -8,11 +8,11 @@ import Icon from "@mui/material/Icon";
 import TextField from "@mui/material/TextField";
 import CardActions from "@mui/material/CardActions";
 import Button from "@mui/material/Button";
-import { Navigate , useParams } from "react-router";
-import auth  from "../lib/authHelper";
+import { Navigate, useParams } from "react-router";
+import auth from "../lib/authHelper";
 // import { useParams } from "react-router";
-import {  useEffect } from "react";
-import { update , read } from "./apiUser"
+import { useEffect } from "react";
+import { update, read } from "./apiUser";
 const EditProfile = ({ match }) => {
   const { userId } = useParams();
   const [values, setValues] = useState({
@@ -123,7 +123,7 @@ const EditProfile = ({ match }) => {
             </Typography>
           )}
         </CardContent>
-        <CardActions>
+        <CardActions sx={{ justifyContent: "center" }}>
           <Button
             color="primary"
             variant="contained"

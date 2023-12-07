@@ -64,7 +64,7 @@ const SignUp = () => {
     backgroundImage: `url(${background})`,
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
-    backgroundSize: "600px 600px",
+    backgroundSize: "550px 550px",
     height: "100vh",
     width: "100%",
     display: "flex",
@@ -109,7 +109,10 @@ const SignUp = () => {
               name="firstName"
               InputProps={{
                 startAdornment: (
-                  <InputAdornment position="start">
+                  <InputAdornment
+                    position="start"
+                    sx={{ background: "#aed8e6", height: "100%" }}
+                  >
                     <span
                       style={{
                         fontWeight: "bold",
@@ -131,6 +134,7 @@ const SignUp = () => {
                 input: {
                   color: "#fff",
                 },
+                margin: "5px 0 5px 0",
               }}
               InputLabelProps={{
                 sx: {
@@ -185,7 +189,10 @@ const SignUp = () => {
               name="email"
               InputProps={{
                 startAdornment: (
-                  <InputAdornment position="start">
+                  <InputAdornment
+                    position="start"
+                    sx={{ background: "#aed8e6", height: "100%" }}
+                  >
                     <AccountCircle />
                   </InputAdornment>
                 ),
@@ -197,6 +204,7 @@ const SignUp = () => {
                 input: {
                   color: "#fff",
                 },
+                margin: "5px 0 5px 0",
               }}
               InputLabelProps={{
                 sx: {
@@ -215,7 +223,10 @@ const SignUp = () => {
               name="password"
               InputProps={{
                 startAdornment: (
-                  <InputAdornment position="start">
+                  <InputAdornment
+                    position="start"
+                    sx={{ background: "#aed8e6", height: "100%" }}
+                  >
                     <LockIcon />
                   </InputAdornment>
                 ),
@@ -227,6 +238,7 @@ const SignUp = () => {
                 input: {
                   color: "#fff",
                 },
+                margin: "5px 0 5px 0",
               }}
               InputLabelProps={{
                 sx: {
@@ -242,11 +254,12 @@ const SignUp = () => {
                 height: "1.8rem",
                 width: "5rem",
                 borderRadius: "12rem",
+                margin: "5px 0 5px 0",
               }}
             >
               Create
             </Button>
-            <Typography>
+            <Typography sx={{ margin: "5px 0 5px 0" }}>
               Already have an account? <Link to="/">Sign In</Link>
             </Typography>
           </Box>
