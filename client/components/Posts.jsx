@@ -22,12 +22,11 @@ const samplePosts = [
 ];
 
 const Posts = () => {
-  
   return (
     <div>
       <Navbar />
-      <Box sx={{ display: "flex" }}>
-        <Box sx={{ flex: 1, bgcolor: "#9e9e9e", padding: 3 }}>
+      <Box sx={{ display: "flex", height: `calc(100vh - ${60}px)` }}>
+        <Box sx={{ flex: 1, bgcolor: "#9e9e9e", padding: 3, height: "100%" }}>
           <Box
             sx={{
               display: "flex",

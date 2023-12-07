@@ -9,7 +9,18 @@ import CardHeader from "@mui/material/CardHeader";
 // if there's almost no difference between them in the future, maybe we can merge them.
 const FriendsCard = (props) => {
   return (
-    <Card sx={{ maxWidth: 600, boxShadow: 3, margin: 1 }}>
+    <Card
+      sx={{
+        width: "100%",
+        boxShadow: 3,
+        margin: 1,
+        borderTop: 2,
+        borderBottom: 2,
+        borderLeft: 10,
+        borderRight: 10,
+        borderRadius: 0,
+      }}
+    >
       <CardHeader
         avatar={<Avatar src={AvatarImage} />}
         title={

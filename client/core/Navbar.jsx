@@ -63,9 +63,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 const Navbar = () => {
   const navigate = useNavigate();
   const handleSignout = async () => {
-    const result = await signout().then(
-      navigate("/")
-    );
+    const result = await signout().then(navigate("/"));
     // Handle the result or perform additional actions if needed
     console.log(result);
   };
@@ -106,7 +104,7 @@ const Navbar = () => {
             />
           </Search>
           <Box sx={{ flexGrow: 1 }} />
-          <Link to={"/posts/"}>
+          <Link to={"/posts/"} style={{ color: "inherit" }}>
             <IconButton
               size="large"
               aria-label="show 4 new mails"
