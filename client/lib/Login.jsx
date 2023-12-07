@@ -19,7 +19,6 @@ import { signin } from "./apiAuth.js";
 // import PropTypes from "prop-types";
 //I deleted porps from Login(props)
 export default function Login() {
-  
   // const naviagte = useNavigate();
   const location = useLocation();
   console.log(location.state);
@@ -55,14 +54,9 @@ export default function Login() {
   };
   const { redirectToReferrer } = values;
   if (redirectToReferrer) {
-    return (
-      <Navigate
-        to={from}
-      />
-    );
+    return <Navigate to={from} />;
   }
 
-  
   const handleChange = (name) => (event) => {
     setValues({ ...values, [name]: event.target.value });
   };
@@ -71,22 +65,27 @@ export default function Login() {
     backgroundImage: `url(${background})`,
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
-    backgroundSize: "cover",
+    backgroundSize: "550px 550px",
     height: "100vh",
     width: "100%",
     display: "flex",
     flexDirection: "column",
-    justifyContent: "center",
+    justifyContent: "flex-start",
     alignItems: "center",
+    position: "relative",
   };
 
   return (
     <div>
       <div style={backgroundStyle}>
-        <Typography>Login to Connect Hub</Typography>
+        <Typography
+          sx={{ marginTop: "2rem", marginBottom: "2rem", fontWeight: "bold" }}
+        >
+          Login to Connect Hub
+        </Typography>
 
         {/* Form */}
-        <Container className={styles.container}>
+        <Container className={styles.containerLogin}>
           <Box
             className={styles.transparentBoxBackground}
             sx={{
@@ -102,17 +101,18 @@ export default function Login() {
             <TextField
               id="email"
               type="email"
-              // className={classes.textField}
               value={values.email}
               onChange={handleChange("email")}
-              margin="normal"
               variant="standard"
               fullWidth
               placeholder="Email ID"
               name="email"
               InputProps={{
                 startAdornment: (
-                  <InputAdornment position="start">
+                  <InputAdornment
+                    position="start"
+                    sx={{ background: "#aed8e6", height: "100%" }}
+                  >
                     <AccountCircle />
                   </InputAdornment>
                 ),
@@ -120,32 +120,33 @@ export default function Login() {
               }}
               sx={{
                 backgroundColor: "#005aaa",
-                borderRadius: "4px",
+                // borderRadius: "4px",
                 input: {
                   color: "#fff",
                 },
+                margin: "5px 0 5px 0",
               }}
               InputLabelProps={{
                 sx: {
-                  color: "#fff", // Replace with your desired color
-                  // Add additional styles if needed
+                  color: "#fff",
                 },
               }}
             />
             <TextField
               id="password"
               type="password"
-              // className={classes.textField}
               value={values.password}
               onChange={handleChange("password")}
-              margin="normal"
               variant="standard"
               fullWidth
               placeholder="Password"
               name="password"
               InputProps={{
                 startAdornment: (
-                  <InputAdornment position="start">
+                  <InputAdornment
+                    position="start"
+                    sx={{ background: "#aed8e6", height: "100%" }}
+                  >
                     <LockIcon />
                   </InputAdornment>
                 ),
@@ -153,15 +154,15 @@ export default function Login() {
               }}
               sx={{
                 backgroundColor: "#005aaa",
-                borderRadius: "4px",
+                // borderRadius: "4px",
                 input: {
                   color: "#fff",
                 },
+                margin: "5px 0 5px 0",
               }}
               InputLabelProps={{
                 sx: {
-                  color: "#fff", // Replace with your desired color
-                  // Add additional styles if needed
+                  color: "#fff",
                 },
               }}
             />
@@ -173,6 +174,7 @@ export default function Login() {
                 height: "1.8rem",
                 width: "5rem",
                 borderRadius: "12rem",
+                margin: "5px 0 5px 0",
               }}
               onClick={clickSubmit}
 
@@ -181,12 +183,22 @@ export default function Login() {
               Login
             </Button>
             {/* </Link> */}
-            <Typography sx={{ textAlign: "center" }}>
+            <Typography sx={{ textAlign: "center", margin: "5px 0 5px 0" }}>
               Do not have an account?
               <Link to="/signup">{" Sign Up!"}</Link>
             </Typography>
           </Box>
         </Container>
+        <Box className={styles.bottomLogo}>
+          <Typography sx={{ fontSize: "0.6rem", fontWeight: "bold" }}>
+            Powered By:
+          </Typography>
+          <Typography sx={{ fontSize: "0.6rem" }}>{"</>"}</Typography>
+          <Typography sx={{ fontSize: "0.6rem", fontWeight: "bold" }}>
+            NodeNinjas
+          </Typography>
+          <Typography sx={{ fontSize: "0.5rem" }}>Est.2023</Typography>
+        </Box>
       </div>
     </div>
   );

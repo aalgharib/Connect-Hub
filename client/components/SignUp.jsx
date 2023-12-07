@@ -64,12 +64,12 @@ const SignUp = () => {
     backgroundImage: `url(${background})`,
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
-    backgroundSize: "cover",
+    backgroundSize: "550px 550px",
     height: "100vh",
     width: "100%",
     display: "flex",
     flexDirection: "column",
-    justifyContent: "center",
+    justifyContent: "flex-start",
     alignItems: "center",
   };
   // if (values.redirectToProfile) {
@@ -78,10 +78,14 @@ const SignUp = () => {
   return (
     <div>
       <div style={backgroundStyle}>
-        <Typography>Create a Connect Hub Account</Typography>
+        <Typography
+          sx={{ marginTop: "2rem", marginBottom: "2rem", fontWeight: "bold" }}
+        >
+          Create a Connect Hub Account
+        </Typography>
 
         {/* Form */}
-        <Container className={styles.container}>
+        <Container className={styles.containerSignup}>
           <Box
             className={styles.transparentBoxBackground}
             sx={{
@@ -100,12 +104,15 @@ const SignUp = () => {
               onChange={handleChange("name")}
               variant="standard"
               fullWidth
-              placeholder="First name"
+              placeholder="Name"
               type="text"
               name="firstName"
               InputProps={{
                 startAdornment: (
-                  <InputAdornment position="start">
+                  <InputAdornment
+                    position="start"
+                    sx={{ background: "#aed8e6", height: "100%" }}
+                  >
                     <span
                       style={{
                         fontWeight: "bold",
@@ -115,7 +122,7 @@ const SignUp = () => {
                         margin: "0 6px 0 6px",
                       }}
                     >
-                      F
+                      N
                     </span>
                   </InputAdornment>
                 ),
@@ -127,6 +134,7 @@ const SignUp = () => {
                 input: {
                   color: "#fff",
                 },
+                margin: "5px 0 5px 0",
               }}
               InputLabelProps={{
                 sx: {
@@ -134,7 +142,7 @@ const SignUp = () => {
                 },
               }}
             />
-            <TextField
+            {/* <TextField
               variant="standard"
               fullWidth
               placeholder="Last name"
@@ -170,7 +178,7 @@ const SignUp = () => {
                   color: "#fff",
                 },
               }}
-            />
+            /> */}
             <TextField
               id="email"
               value={values.email}
@@ -181,7 +189,10 @@ const SignUp = () => {
               name="email"
               InputProps={{
                 startAdornment: (
-                  <InputAdornment position="start">
+                  <InputAdornment
+                    position="start"
+                    sx={{ background: "#aed8e6", height: "100%" }}
+                  >
                     <AccountCircle />
                   </InputAdornment>
                 ),
@@ -193,6 +204,7 @@ const SignUp = () => {
                 input: {
                   color: "#fff",
                 },
+                margin: "5px 0 5px 0",
               }}
               InputLabelProps={{
                 sx: {
@@ -211,7 +223,10 @@ const SignUp = () => {
               name="password"
               InputProps={{
                 startAdornment: (
-                  <InputAdornment position="start">
+                  <InputAdornment
+                    position="start"
+                    sx={{ background: "#aed8e6", height: "100%" }}
+                  >
                     <LockIcon />
                   </InputAdornment>
                 ),
@@ -223,6 +238,7 @@ const SignUp = () => {
                 input: {
                   color: "#fff",
                 },
+                margin: "5px 0 5px 0",
               }}
               InputLabelProps={{
                 sx: {
@@ -238,15 +254,26 @@ const SignUp = () => {
                 height: "1.8rem",
                 width: "5rem",
                 borderRadius: "12rem",
+                margin: "5px 0 5px 0",
               }}
             >
               Create
             </Button>
-            <Typography>
+            <Typography sx={{ margin: "5px 0 5px 0" }}>
               Already have an account? <Link to="/">Sign In</Link>
             </Typography>
           </Box>
         </Container>
+        <Box className={styles.bottomLogo}>
+          <Typography sx={{ fontSize: "0.6rem", fontWeight: "bold" }}>
+            Powered By:
+          </Typography>
+          <Typography sx={{ fontSize: "0.6rem" }}>{"</>"}</Typography>
+          <Typography sx={{ fontSize: "0.6rem", fontWeight: "bold" }}>
+            NodeNinjas
+          </Typography>
+          <Typography sx={{ fontSize: "0.5rem" }}>Est.2023</Typography>
+        </Box>
       </div>
     </div>
   );

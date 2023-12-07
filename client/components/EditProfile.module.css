@@ -1,8 +1,8 @@
 .card {
-  max-width: 600px;
-  margin: auto;
+  max-width: 370px;
+  margin: 0 auto 0 auto;
   text-align: center;
-  margin-top: 40px;
+  margin-top: 10px;
   padding-bottom: 16px;
 }
 
