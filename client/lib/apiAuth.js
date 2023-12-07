@@ -14,17 +14,6 @@ const signin = async (user) => {
     console.log(err);
   }
 };
-// try {
-//   const result = await signin(user);
-//   console.log("Authentication successful:", result);
-// } catch (error) {
-//   if (error.response && error.response.status === 401) {
-//     console.error("Authentication failed: Invalid credentials");
-//     // Display a user-friendly error message
-//   } else {
-//     console.error("Authentication failed:", error);
-//   }
-// }
 const signout = async () => {
   try {
     let response = await fetch("/auth/signout/", { method: "GET" });

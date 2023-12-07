@@ -56,17 +56,6 @@ export default function Login() {
   if (redirectToReferrer) {
     return <Navigate to={from} />;
   }
-  // const { from } = location.state || {
-  //   from: {
-  //     pathname: "/Home/",
-  //   },
-  // };
-  // const { redirectToReferrer } = values;
-  // if (redirectToReferrer) {
-  //   return (
-  //     <Navigate to={{ pathname: from, state: { userId: data.user._id } }} />
-  //   );
-  // }
 
   const handleChange = (name) => (event) => {
     setValues({ ...values, [name]: event.target.value });
