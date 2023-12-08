@@ -1,6 +1,6 @@
 // import React from "react";
 import { Navigate, useLocation } from "react-router-dom";
-import auth from "./authHelper";
+import auth from "./authHelper.js";
 // import PropTypes from "prop-types";
 
 export default function PrivateRoute({ children, ...rest }) {
