@@ -1,7 +1,8 @@
+const API_URL = import.meta.env.API_URL || "http://localhost:3000";
 
 const registerUser = async (user) => {
   try {
-    let response = await fetch("/api/users/", {
+    let response = await fetch(`${API_URL}/api/users/`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -24,7 +25,7 @@ const registerUser = async (user) => {
 // list all the users using get method
 const list = async (signal) => {
   try {
-    let response = await fetch("/api/users/", {
+    let response = await fetch(`${API_URL}/api/users/`, {
       method: "GET",
 
       signal: signal,
@@ -37,7 +38,7 @@ const list = async (signal) => {
 // read the user info using get method
 const read = async (params, credentials, signal) => {
   try {
-    let response = await fetch("/api/users/" + params.userId, {
+    let response = await fetch(`${API_URL}/api/users/` + params.userId, {
       method: "GET",
       signal: signal,
       headers: {
@@ -54,7 +55,7 @@ const read = async (params, credentials, signal) => {
 // update user info using put method
 const update = async (params, credentials, user) => {
   try {
-    let response = await fetch("/api/users/" + params.userId, {
+    let response = await fetch(`${API_URL}/api/users/` + params.userId, {
       method: "PUT",
       headers: {
         Accept: "application/json",
@@ -71,7 +72,7 @@ const update = async (params, credentials, user) => {
 // delete user using the delete method
 const deleteUser = async (params, credentials) => {
   try {
-    let response = await fetch("/api/users/" + params.userId, {
+    let response = await fetch(`${API_URL}/api/users/` + params.userId, {
       method: "DELETE",
       headers: {
         Accept: "application/json",
