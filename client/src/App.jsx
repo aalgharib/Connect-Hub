@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 // import "./App.css";
 import SignUp from "../components/SignUp.jsx";
 import Login from "../lib/Login.jsx";
-import PrivateRoute from "../lib/PrivateRoute.jsx";
+import PrivateRoute from "./PrivateRoute.jsx";
 import NoPage from "../core/NoPage.jsx";
 import Home from "../core/Home.jsx";
 import Posts from "../components/Posts.jsx";
