@@ -5,10 +5,10 @@ import Login from "../lib/Login.jsx";
 import NoPage from "../core/NoPage.jsx";
 import Home from "../core/Home.jsx";
 import Posts from "../components/Posts.jsx";
+import PrivateRoute from "../lib/PrivateRoute.jsx";
 import Profile from "../components/Profile.jsx";
 import Friends from "../components/Friends.jsx";
 import EditProfile from "../components/EditProfile.jsx";
-import PrivateRoute from "../lib/PrivateRoute.jsx";
 
 function App() {
   return (
